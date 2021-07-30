@@ -1,38 +1,115 @@
-.App {
-  text-align: center;
+:root{
+  --cursor-color: red;
+  cursor: none;
 }
 
-.App-logo {
-  height: 40vmin;
+.section{
+  min-height: 100vh;
+  position: relative;
+  z-index: 100;
+}
+
+.floating-right{
+  left: unset !important;
+  top: unset !important;
+}
+
+.canvas{
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.floating-text{
+  position: absolute;
+  color: white;
+  left: 5rem;
+  top: 4rem;
+  z-index: 100;
+  text-shadow: 1px 1px 5px black;;
+  /*animation: float 6s ease-in-out infinite;*/
+}
+
+.floating-text h1{
+  font-size: 5em;
+  margin: 0;
+}
+
+.floating-text p{
+  width: 30rem;
+  font-size: 1.8em;
+}
+
+#cursor-follower{
+  width: 30px;
+  height: 20px;
+  z-index: 1000;
+  pointer-events: none;
+  position: fixed;
+  transition: width .3s;
+  transform-origin: center center;
+  animation: spin infinite 10s forwards linear;
+}
+
+#cursor.hovering{
+  width: 40px;
+}
+
+#cursor-follower .hexagon{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-left: 2px solid var(--cursor-color);
+  border-right: 2px solid var(--cursor-color);
+  transform-origin: center center;
+}
+
+#cursor-follower .hexagon:nth-child(1){
+  transform: rotateZ(120deg);
+}
+
+#cursor-follower .hexagon:nth-child(2){
+  transform: rotateZ(240deg);
+}
+
+#cursor-point{
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background-color: var(--cursor-color);
+  border-radius: 100%;
+  transform: translate3d(-50%, -50%, 0);
+  z-index: 1000;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@keyframes float {
+0% {
+  transform: translate3d(-8px, 0px, 0);
+}
+25%{
+  transform: translate3d(3px, -10px, 0);
+}
+50% {
+  transform: translate3d(-2px, -20px, 0);
+}
+75%{
+  transform: translate3d(6px, -10px, 0);
+}
+100% {
+  transform: translate3d(-8px, 0px, 0);
+}
+}
+
+@keyframes spin {
+  0%{
+    transform: translate3d(-50%, -50%, 0) rotateZ(0deg);
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+  100%{
+    transform: translate3d(-50%, -50%, 0) rotateZ(360deg);
   }
 }
