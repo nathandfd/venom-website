@@ -73,8 +73,12 @@ function App() {
            })
            gsap.to(parallaxObjParent.current.children,{
                onUpdate:()=>{
-
-                   parallaxObjParent.current.children.forEach((child,index)=>{
+                   let tempSortedArray = [...parallaxObjParent.current.children]
+                   tempSortedArray.sort((a,b)=>{
+                       return b.position.z-a.position.z
+                   })
+                   console.log(tempSortedArray)
+                   tempSortedArray.forEach((child,index)=>{
                        child.position.set(-(e.clientX * (0.02/(index+1)) / window.innerWidth)+0.5, (e.clientY * (0.02/(index+1)) / window.innerHeight)-0.1)
                    })
                }
@@ -84,7 +88,7 @@ function App() {
                top: -(e.clientY * 1 / window.innerHeight)+5+'rem',
            })
            gsap.to('.floating-text.floating-right',{
-               right: (e.clientX * 2 / window.innerWidth)+10+'rem',
+               right: (e.clientX * 2 / window.innerWidth)+5+'rem',
                bottom: (e.clientY * 1 / window.innerHeight)+5+'rem',
            })
        })
@@ -192,8 +196,8 @@ function App() {
               <Suspense fallback={null}>
                   <group ref={parallaxObjParent}>
                       <ImageRect imageLink={'/buisness.jpg'} loaded={setParallaxObjLoaded} reference={parallaxObj} position={[0.3,-0.1,4]}/>
-                      <ImageRect imageLink={'/capybara.jpg'} loaded={setParallaxObjLoaded} reference={parallaxObj} rotation={[0,0,0.1]} position={[0.3,-0.1,3.9]}/>
-                      <ImageRect imageLink={'/office.jpg'} loaded={setParallaxObjLoaded} reference={parallaxObj} rotation={[0,0,-0.1]} position={[0.3,-0.1,3.9]}/>
+                      <ImageRect imageLink={'/capybara.jpg'} loaded={()=>{}} reference={parallaxObj} rotation={[0,0,0.1]} position={[0.3,-0.1,3.9]}/>
+                      <ImageRect imageLink={'/office.jpg'} loaded={()=>{}} reference={parallaxObj} rotation={[0,0,-0.1]} position={[0.3,-0.1,3.9]}/>
                   </group>
               </Suspense>
           </Canvas>
