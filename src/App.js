@@ -34,11 +34,13 @@ function Background(props) {
 
 const ImageRect = (props)=>{
     const texture = useLoader(TextureLoader,props.imageLink)
-    const imageWidth = 1920
-    const imageHeight = 1280
+    let [imageWidth, setImageWidth] = useState(0)
+    let [imageHeight, setImageHeight] = useState(0)
     const rectWidth = 1.6
 
     useEffect(()=>{
+        setImageHeight(texture.image.naturalHeight)
+        setImageWidth(texture.image.naturalWidth)
         props.loaded(true)
     }, [texture])
 
@@ -60,7 +62,6 @@ function App() {
 
     useEffect(()=>{
        document.addEventListener('mousemove',(e)=>{
-           console.log(parallaxObjParent.current.children)
            gsap.to(cursor.current,{
                left: e.clientX,
                top: e.clientY,
@@ -77,7 +78,6 @@ function App() {
                    tempSortedArray.sort((a,b)=>{
                        return b.position.z-a.position.z
                    })
-                   console.log(tempSortedArray)
                    tempSortedArray.forEach((child,index)=>{
                        child.position.set(-(e.clientX * (0.02/(index+1)) / window.innerWidth)+0.5, (e.clientY * (0.02/(index+1)) / window.innerHeight)-0.1)
                    })

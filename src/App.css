@@ -36,6 +36,20 @@
 .floating-text h1{
   font-size: 5em;
   margin: 0;
+  position: relative;
+  width: fit-content;
+  text-shadow: none;
+}
+
+.floating-text h1:before{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 2rem;
+  width: 95%;
+  height: 50%;
+  background-color: darkred;
+  z-index: -1;
 }
 
 .floating-text p{
