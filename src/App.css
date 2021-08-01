@@ -107,10 +107,10 @@
 
 .header .navbar{
   position: absolute;
-  height: 5rem;
   z-index: 250;
   width: 100%;
   border-bottom: 1px rgba(255,255,255, 0.2) solid;
+  backdrop-filter: blur(10px);
 }
 
 .header ul{
@@ -118,18 +118,21 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin: 1rem auto;
+  margin-left: auto;
+  margin-right: auto;
   width: 60%;
 }
 
 .header ul li{
   color: white;
   list-style: none;
-  font-size: 1.5em;
+  font-size: 1.2em;
+  text-align: center;
 }
 
-.header ul li img{
+.header img{
   max-width: 10rem;
+  height: auto;
 }
 
 /*Cursor*/

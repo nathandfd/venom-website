@@ -6,6 +6,7 @@ import {gsap} from 'gsap'
 import {Button} from "./Components/Button";
 import {TextureLoader} from "three";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {Link} from "./Components/Link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -167,12 +168,13 @@ function App() {
     <div className="App" style={{'min-height':'100vh','backgroundColor':'#121212'}}>
         <div className="header">
             <div className="navbar">
+                <div className="blurred-background"></div>
                 <ul>
-                    <li>Présentation</li>
-                    <li>Partenaire</li>
+                    <li><Link text={"Présentation"} setHover={setCursorHovering}/></li>
+                    <li><Link text={"Partenaire"} setHover={setCursorHovering}/></li>
                     <li><img src="/venom-logo.png" alt=""/></li>
-                    <li>Recrutement</li>
-                    <li>contact</li>
+                    <li><Link text={"Recrutement"} setHover={setCursorHovering}/></li>
+                    <li><Link text={"Contact"} setHover={setCursorHovering}/></li>
                 </ul>
             </div>
             <div className="background">
