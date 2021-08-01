@@ -5,8 +5,12 @@
 
 .section{
   min-height: 100vh;
-  position: relative;
-  z-index: 100;
+  width: 100%;
+  position: absolute;
+  z-index: 200;
+  top: 0;
+  left: 0;
+  visibility: hidden;
 }
 
 .floating-right{
@@ -30,7 +34,6 @@
   top: 4rem;
   z-index: 100;
   text-shadow: 1px 1px 5px black;;
-  /*animation: float 6s ease-in-out infinite;*/
 }
 
 .floating-text h1{
@@ -56,6 +59,80 @@
   width: 33rem;
   font-size: 1.8em;
 }
+
+.header{
+  position: relative;
+  z-index: 250;
+  height: 100vh;
+  width: 100%;
+}
+
+.header h1{
+  margin: 0;
+  padding: 0;
+  color: white;
+  margin-left: 3rem;
+  font-size: 4em;
+  max-width: 45%;
+
+}
+
+.header .background{
+  height: 100%;
+  width: 100%;
+}
+
+.header .background1, .header .background2{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+          linear-gradient(111.34deg, rgba(27, 23, 23, 0.95) 48.44%, rgba(129, 0, 0, 0.5) 81.77%),
+          url("Assets/img/office.jpg")
+          no-repeat;
+  background-size: cover;
+  clip-path: polygon(58% 0, 0 0, 0 100%, 39% 100%);
+}
+
+
+.header .background2{
+  clip-path: polygon(58% 0, 100% 0, 100% 100%, 39% 100%);
+}
+
+.header .navbar{
+  position: absolute;
+  height: 5rem;
+  z-index: 250;
+  width: 100%;
+  border-bottom: 1px rgba(255,255,255, 0.2) solid;
+}
+
+.header ul{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem auto;
+  width: 60%;
+}
+
+.header ul li{
+  color: white;
+  list-style: none;
+  font-size: 1.5em;
+}
+
+.header ul li img{
+  max-width: 10rem;
+}
+
+/*Cursor*/
 
 #cursor-follower{
   width: 30px;
@@ -98,24 +175,6 @@
   transform: translate3d(-50%, -50%, 0);
   z-index: 1000;
   pointer-events: none;
-}
-
-@keyframes float {
-0% {
-  transform: translate3d(-8px, 0px, 0);
-}
-25%{
-  transform: translate3d(3px, -10px, 0);
-}
-50% {
-  transform: translate3d(-2px, -20px, 0);
-}
-75%{
-  transform: translate3d(6px, -10px, 0);
-}
-100% {
-  transform: translate3d(-8px, 0px, 0);
-}
 }
 
 @keyframes spin {

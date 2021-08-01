@@ -61,38 +61,40 @@ function App() {
     const [parallaxObjLoaded, setParallaxObjLoaded] = useState(false)
 
     useEffect(()=>{
-       document.addEventListener('mousemove',(e)=>{
-           gsap.to(cursor.current,{
-               left: e.clientX,
-               top: e.clientY,
-               duration: .2
-           })
-           gsap.to(follower.current,{
-               left: e.clientX,
-               top: e.clientY,
-               duration: 1
-           })
-           gsap.to(parallaxObjParent.current.children,{
-               onUpdate:()=>{
-                   let tempSortedArray = [...parallaxObjParent.current.children]
-                   tempSortedArray.sort((a,b)=>{
-                       return b.position.z-a.position.z
-                   })
-                   tempSortedArray.forEach((child,index)=>{
-                       child.position.set(-(e.clientX * (0.02/(index+1)) / window.innerWidth)+0.5, (e.clientY * (0.02/(index+1)) / window.innerHeight)-0.1)
-                   })
-               }
-           })
-           gsap.to('.floating-text.floating-left',{
-               left: -(e.clientX * 2 / window.innerWidth)+10+'rem',
-               top: -(e.clientY * 1 / window.innerHeight)+5+'rem',
-           })
-           gsap.to('.floating-text.floating-right',{
-               right: (e.clientX * 2 / window.innerWidth)+5+'rem',
-               bottom: (e.clientY * 1 / window.innerHeight)+5+'rem',
-           })
-       })
-    },[])
+        if (parallaxObjLoaded) {
+            document.addEventListener('mousemove', (e) => {
+                gsap.to(cursor.current, {
+                    left: e.clientX,
+                    top: e.clientY,
+                    duration: .2
+                })
+                gsap.to(follower.current, {
+                    left: e.clientX,
+                    top: e.clientY,
+                    duration: 1
+                })
+                gsap.to(parallaxObjParent.current.children, {
+                    onUpdate: () => {
+                        let tempSortedArray = [...parallaxObjParent.current.children]
+                        tempSortedArray.sort((a, b) => {
+                            return b.position.z - a.position.z
+                        })
+                        tempSortedArray.forEach((child, index) => {
+                            child.position.set(-(e.clientX * (0.02 / (index + 1)) / window.innerWidth) + 0.5, (e.clientY * (0.02 / (index + 1)) / window.innerHeight) - 0.1)
+                        })
+                    }
+                })
+                gsap.to('.floating-text.floating-left', {
+                    left: -(e.clientX * 2 / window.innerWidth) + 10 + 'rem',
+                    top: -(e.clientY * 1 / window.innerHeight) + 5 + 'rem',
+                })
+                gsap.to('.floating-text.floating-right', {
+                    right: (e.clientX * 2 / window.innerWidth) + 5 + 'rem',
+                    bottom: (e.clientY * 1 / window.innerHeight) + 5 + 'rem',
+                })
+            })
+        }
+    },[parallaxObjLoaded])
 
     useEffect(()=>{
         if (cursorHovering){
@@ -117,50 +119,45 @@ function App() {
 
     useEffect(()=>{
         if (parallaxObjLoaded){
-            const timelineSection1 = gsap.timeline({
+            const timeline = gsap.timeline({
                 scrollTrigger:{
-                    trigger:'.section1',
+                    trigger:'.App',
                     pin: true,
                     start: "top top",
-                    end: "+=1600",
+                     end: "+=6000",
                     scrub: true
                 }
             })
-            timelineSection1.from('.section1',{opacity:1})
-                .to('.section1',{opacity:0, duration:1})
+            timeline
+                .set(parallaxObjParent.current.position,{x:0})
+                .set('.header',{visibility:'visible'},'<')
+                .from('.header .background1',{translateX:0})
+                .from('.header .background2',{translateX:0})
+                .from('.header .navbar',{translateY:0})
+                .to('.header .background1',{translateX:'-60%', duration:2, ease:"none"})
+                .to('.header .background2',{translateX:'60%', duration:2, ease:"none"},'<')
+                .to('.header .navbar',{translateY:'-100%', duration:2, ease:"none"},'<')
+                .set('.section1',{visibility:'visible'},'<')
+                .from('.section1',{opacity:0},'<0.5')
+                .set('.header',{visibility:'hidden'})
+                .to('.section1',{opacity:1,duration:1})
+                .to('.section1',{opacity:0, duration:1, delay:1})
+                .set('.section1',{visibility:'hidden'})
                 .from(parallaxObjParent.current.position,{x:0})
                 .to(parallaxObjParent.current.position,{x:-1, duration:1})
                 .to(parallaxObjParent.current.children[1].position,{z:'+=0.1', duration:1},'<')
                 .to(parallaxObjParent.current.children[0].position,{z:'-=0.1', duration:1},'<')
-
-            const timelineSection2 = gsap.timeline({
-                scrollTrigger:{
-                    trigger:'.section2',
-                    pin: true,
-                    start: "top top",
-                    end: "+=1600",
-                    scrub: true
-                }
-            })
-
-                timelineSection2.from('.section2',{opacity:0})
+                .set('.section2',{visibility:'visible'})
+                .from('.section2',{opacity:0})
                 .to('.section2',{opacity:1, duration:2})
-                .to('.section2',{opacity:0, duration:2, delay:3})
+                .to('.section2',{opacity:0, duration:2, delay:1})
+                .set('.section2',{visibility:'hidden'})
+                .from(parallaxObjParent.current.position,{x:-1})
                 .to(parallaxObjParent.current.position,{x:0, duration:1})
-                .to(parallaxObjParent.current.children[2].position,{z:'+=0.1', duration:1})
+                .to(parallaxObjParent.current.children[2].position,{z:'+=0.1', duration:1},'<')
                 .to(parallaxObjParent.current.children[1].position,{z:'-=0.1', duration:1},'<')
-
-            const timelineSection3 = gsap.timeline({
-                scrollTrigger:{
-                    trigger:'.section3',
-                    pin: true,
-                    start: "top top",
-                    end: "+=1600",
-                    scrub: true
-                }
-            })
-
-            timelineSection3.from('.section3',{opacity:0})
+                .set('.section3',{visibility:'visible'})
+                .from('.section3',{opacity:0})
                 .to('.section3',{opacity:1, duration:1})
 
         }
@@ -168,6 +165,25 @@ function App() {
 
   return (
     <div className="App" style={{'min-height':'100vh','backgroundColor':'#121212'}}>
+        <div className="header">
+            <div className="navbar">
+                <ul>
+                    <li>Présentation</li>
+                    <li>Partenaire</li>
+                    <li><img src="/venom-logo.png" alt=""/></li>
+                    <li>Recrutement</li>
+                    <li>contact</li>
+                </ul>
+            </div>
+            <div className="background">
+                <div className="background1">
+                    <h1>
+                        Rejoins l’aventure et deviens commercial chez Venom !
+                    </h1>
+                </div>
+                <div className="background2"></div>
+            </div>
+        </div>
         <div className="section section1">
             <div className="floating-text floating-left">
                 <h1>Présentation</h1>
