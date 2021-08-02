@@ -93,7 +93,7 @@
   width: 100%;
   height: 100%;
   background:
-          linear-gradient(111.34deg, rgba(27, 23, 23, 0.95) 48.44%, rgba(129, 0, 0, 0.5) 81.77%),
+          linear-gradient(111.34deg, rgba(27, 23, 23, 0.95) 48.44%, rgba(129, 0, 0, 0.8) 81.77%),
           url("Assets/img/office.jpg")
           no-repeat;
   background-size: cover;
@@ -121,6 +121,7 @@
   margin-left: auto;
   margin-right: auto;
   width: 60%;
+  padding: 0;
 }
 
 .header ul li{
@@ -133,6 +134,33 @@
 .header img{
   max-width: 10rem;
   height: auto;
+}
+
+.scroll-down{
+  z-index: 250;
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8em;
+}
+
+.chevron{
+  animation: float 3s alternate infinite ease-in-out;
+}
+
+.chevron .vector{
+  width: 0.8rem;
+  height: 0.8rem;
+  display: block;
+  border-bottom: 2px solid white;
+  border-right: 2px solid white;
+  transform: rotateZ(45deg);
 }
 
 /*Cursor*/
@@ -187,5 +215,14 @@
 
   100%{
     transform: translate3d(-50%, -50%, 0) rotateZ(360deg);
+  }
+}
+
+@keyframes float {
+  from{
+    transform: translateY(-50%);
+  }
+  to{
+    transform: translateY(50%);
   }
 }

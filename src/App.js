@@ -135,11 +135,13 @@ function App() {
                 .from('.header .background1',{translateX:0})
                 .from('.header .background2',{translateX:0})
                 .from('.header .navbar',{translateY:0})
+                .from('.header .scroll-down',{translateY:0})
                 .to('.header .background1',{translateX:'-60%', duration:2, ease:"none"})
                 .to('.header .background2',{translateX:'60%', duration:2, ease:"none"},'<')
                 .to('.header .navbar',{translateY:'-100%', duration:2, ease:"none"},'<')
+                .to('.header .scroll-down',{translateY:'120%', duration:2, ease:"none"},'<')
                 .set('.section1',{visibility:'visible'},'<')
-                .from('.section1',{opacity:0},'<0.5')
+                .from('.section1',{opacity:0},'<0.7')
                 .set('.header',{visibility:'hidden'})
                 .to('.section1',{opacity:1,duration:1})
                 .to('.section1',{opacity:0, duration:1, delay:1})
@@ -176,6 +178,12 @@ function App() {
                     <li><Link text={"Recrutement"} setHover={setCursorHovering}/></li>
                     <li><Link text={"Contact"} setHover={setCursorHovering}/></li>
                 </ul>
+            </div>
+            <div className={"scroll-down"}>
+                <p>Descend pour en savoir plus</p>
+                <div className="chevron">
+                    <div className="vector"></div>
+                </div>
             </div>
             <div className="background">
                 <div className="background1">
