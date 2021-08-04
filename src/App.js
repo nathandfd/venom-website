@@ -6,17 +6,15 @@ import {gsap} from 'gsap'
 import {Button} from "./Components/Button";
 import {TextureLoader} from "three";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { CSSRulePlugin } from "gsap/CSSRulePlugin";
 import {Link} from "./Components/Link";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, CSSRulePlugin);
 
 function Background(props) {
-  // This reference will give us direct access to the THREE.Mesh object
   const mesh = useRef()
-  // Set up state for the hovered and active state
   const [hovered, setHover] = useState(false)
   const [active, setActive] = useState(false)
-  // Subscribe this component to the render-loop, rotate the mesh every frame
   useFrame((state, delta) => {
       mesh.current.rotation.y += 0.0005
   })
@@ -120,54 +118,52 @@ function App() {
 
     useEffect(()=>{
         if (parallaxObjLoaded){
+            const h1Before = CSSRulePlugin.getRule('.floating-text h1:before')
+
             const timeline = gsap.timeline({
                 scrollTrigger:{
                     trigger:'.App',
                     pin: true,
                     start: "top top",
                      end: "+=6000",
-                    scrub: true
+                    scrub: 0.1,
+                    markers:true
                 }
             })
+
             timeline
                 .set(parallaxObjParent.current.position,{x:0})
                 .set('.header',{visibility:'visible'},'<')
-                .from('.header .background1',{translateX:0})
-                .from('.header .background2',{translateX:0})
-                .from('.header .navbar',{translateY:0})
-                .from('.header .scroll-down',{translateY:0})
-                .to('.header .background1',{translateX:'-60%', duration:2, ease:"none"})
-                .to('.header .background2',{translateX:'60%', duration:2, ease:"none"},'<')
-                .to('.header .navbar',{translateY:'-100%', duration:2, ease:"none"},'<')
-                .to('.header .scroll-down',{translateY:'120%', duration:2, ease:"none"},'<')
+                .fromTo('.header .background1',{translateX:0},{translateX:'-60%', duration:1, ease:"none"})
+                .fromTo('.header .background2',{translateX:0},{translateX:'60%', duration:1, ease:"none"},'<')
+                .fromTo('.header .navbar',{translateY:0},{translateY:'-100%', duration:1, ease:"none"},'<')
+                .fromTo('.header .scroll-down',{translateY:0},{translateY:'120%', duration:1, ease:"none"},'<')
                 .set('.section1',{visibility:'visible'},'<')
-                .from('.section1',{opacity:0},'<0.7')
+                .fromTo('.section1',{opacity:0},{opacity:1,duration:1, onComplete:()=>{gsap.fromTo(h1Before,{cssRule:{width:'0'}},{cssRule:{width:'95%'}, duration:1.5})}},'<0.7')
                 .set('.header',{visibility:'hidden'})
-                .to('.section1',{opacity:1,duration:1})
                 .to('.section1',{opacity:0, duration:1, delay:1})
+                // .fromTo(h1Before,{cssRule:{width:'95%'}},{cssRule:{width:'0%'}, duration:0.5},'<-=0.5')
                 .set('.section1',{visibility:'hidden'})
-                .from(parallaxObjParent.current.position,{x:0})
                 .to(parallaxObjParent.current.position,{x:-1, duration:1})
                 .to(parallaxObjParent.current.children[1].position,{z:'+=0.1', duration:1},'<')
                 .to(parallaxObjParent.current.children[0].position,{z:'-=0.1', duration:1},'<')
                 .set('.section2',{visibility:'visible'})
-                .from('.section2',{opacity:0})
-                .to('.section2',{opacity:1, duration:2})
-                .to('.section2',{opacity:0, duration:2, delay:1})
+                .fromTo('.section2',{opacity:0},{opacity:1, duration:1, onComplete:()=>{gsap.fromTo(h1Before,{cssRule:{width:'0'}},{cssRule:{width:'95%'}, duration:1.5})}})
+                // .fromTo(h1Before,{cssRule:{width:'0%'}},{cssRule:{width:'95%'}, duration:0.5},'<+=0.5')
+                .to('.section2',{opacity:0, duration:1, delay:1})
+                // .fromTo(h1Before,{cssRule:{width:'95%'}},{cssRule:{width:'0%'}, duration:0.5},'<-=0.5')
                 .set('.section2',{visibility:'hidden'})
-                .from(parallaxObjParent.current.position,{x:-1})
                 .to(parallaxObjParent.current.position,{x:0, duration:1})
                 .to(parallaxObjParent.current.children[2].position,{z:'+=0.1', duration:1},'<')
                 .to(parallaxObjParent.current.children[1].position,{z:'-=0.1', duration:1},'<')
                 .set('.section3',{visibility:'visible'})
-                .from('.section3',{opacity:0})
-                .to('.section3',{opacity:1, duration:1})
-
+                .fromTo('.section3',{opacity:0},{opacity:1, duration:1, onComplete:()=>{gsap.fromTo(h1Before,{cssRule:{width:'0'}},{cssRule:{width:'95%'}, duration:1.5})}})
+                // .fromTo(h1Before,{cssRule:{width:'0%'}},{cssRule:{width:'95%'}, duration:0.5},'<+=0.5')
         }
     },[parallaxObjLoaded])
 
   return (
-    <div className="App" style={{'min-height':'100vh','backgroundColor':'#121212'}}>
+    <div className="App" style={{'minHeight':'100vh','backgroundColor':'#121212'}}>
         <div className="header">
             <div className="navbar">
                 <div className="blurred-background"></div>
