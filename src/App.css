@@ -49,8 +49,8 @@
   position: absolute;
   top: 50%;
   left: 2rem;
-  width: 95%;
   height: 50%;
+  width: 0;
   background-color: darkred;
   z-index: -1;
 }

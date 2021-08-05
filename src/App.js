@@ -127,9 +127,17 @@ function App() {
                     start: "top top",
                      end: "+=6000",
                     scrub: 0.1,
-                    markers:true
                 }
             })
+
+            const beforeLineAnimation = gsap.timeline({
+                paused:true,
+            })
+
+            beforeLineAnimation
+                // .set(h1Before, {cssRule:{height:'10%',top:'70%'}})
+                .fromTo(h1Before,{cssRule:{width:'0%'}},{cssRule:{width:'95%'}, duration:.75, ease:"power4"})
+                // .to(h1Before,{cssRule:{height:'50%',top:'50%'}, duration:.25,ease:"power4"})
 
             timeline
                 .set(parallaxObjParent.current.position,{x:0})
@@ -139,7 +147,7 @@ function App() {
                 .fromTo('.header .navbar',{translateY:0},{translateY:'-100%', duration:1, ease:"none"},'<')
                 .fromTo('.header .scroll-down',{translateY:0},{translateY:'120%', duration:1, ease:"none"},'<')
                 .set('.section1',{visibility:'visible'},'<')
-                .fromTo('.section1',{opacity:0},{opacity:1,duration:1, onComplete:()=>{gsap.fromTo(h1Before,{cssRule:{width:'0'}},{cssRule:{width:'95%'}, duration:1.5})}},'<0.7')
+                .fromTo('.section1',{opacity:0},{opacity:1,duration:1, onStart:()=>{beforeLineAnimation.pause(0)}, onComplete:()=>{beforeLineAnimation.resume()}},'<0.7')
                 .set('.header',{visibility:'hidden'})
                 .to('.section1',{opacity:0, duration:1, delay:1})
                 // .fromTo(h1Before,{cssRule:{width:'95%'}},{cssRule:{width:'0%'}, duration:0.5},'<-=0.5')
@@ -148,7 +156,7 @@ function App() {
                 .to(parallaxObjParent.current.children[1].position,{z:'+=0.1', duration:1},'<')
                 .to(parallaxObjParent.current.children[0].position,{z:'-=0.1', duration:1},'<')
                 .set('.section2',{visibility:'visible'})
-                .fromTo('.section2',{opacity:0},{opacity:1, duration:1, onComplete:()=>{gsap.fromTo(h1Before,{cssRule:{width:'0'}},{cssRule:{width:'95%'}, duration:1.5})}})
+                .fromTo('.section2',{opacity:0},{opacity:1, duration:1, onStart:()=>{beforeLineAnimation.pause(0)}, onComplete:()=>{beforeLineAnimation.resume()}})
                 // .fromTo(h1Before,{cssRule:{width:'0%'}},{cssRule:{width:'95%'}, duration:0.5},'<+=0.5')
                 .to('.section2',{opacity:0, duration:1, delay:1})
                 // .fromTo(h1Before,{cssRule:{width:'95%'}},{cssRule:{width:'0%'}, duration:0.5},'<-=0.5')
@@ -157,7 +165,7 @@ function App() {
                 .to(parallaxObjParent.current.children[2].position,{z:'+=0.1', duration:1},'<')
                 .to(parallaxObjParent.current.children[1].position,{z:'-=0.1', duration:1},'<')
                 .set('.section3',{visibility:'visible'})
-                .fromTo('.section3',{opacity:0},{opacity:1, duration:1, onComplete:()=>{gsap.fromTo(h1Before,{cssRule:{width:'0'}},{cssRule:{width:'95%'}, duration:1.5})}})
+                .fromTo('.section3',{opacity:0},{opacity:1, duration:1, onStart:()=>{beforeLineAnimation.pause(0)}, onComplete:()=>{beforeLineAnimation.resume()}})
                 // .fromTo(h1Before,{cssRule:{width:'0%'}},{cssRule:{width:'95%'}, duration:0.5},'<+=0.5')
         }
     },[parallaxObjLoaded])
@@ -192,21 +200,21 @@ function App() {
         </div>
         <div className="section section1">
             <div className="floating-text floating-left">
-                <h1>Présentation</h1>
+                <h1 className={"sectionTitle"}>Présentation</h1>
                 <p>VENOM est un réseau de distribution commercial qui est présent sur des marchés porteurs tels que la fourniture d’énergie, l’assurance ou encore la presse. Nous proposons par l’intermédiaire de nos forces de vente les offres les plus compétitives du marché actuel.</p>
                 <Button text={"Découvrir"} setHover={setCursorHovering} />
             </div>
         </div>
         <div className="section section2">
             <div className="floating-text floating-right">
-                <h1>Partenaire</h1>
+                <h1 className={"sectionTitle"}>Partenaire</h1>
                 <p>VENOM est partenaire d’ENGIE, fournisseur historique de gaz. Notre seule volonté est de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. C’est pourquoi nous mobilisons nos forces de vente afin de promouvoir les offres d’ENGIE.</p>
                 <Button text={"En savoir plus"} setHover={setCursorHovering} />
             </div>
         </div>
         <div className="section section3">
             <div className="floating-text floating-left">
-                <h1>Recrutement</h1>
+                <h1 className={"sectionTitle"}>Recrutement</h1>
                 <p>Venom recrute à travers toute la France pour mener à bien ses objectifs. Conseillers Commerciaux, Managers Commerciaux ou encore Directeurs d’agences, nous recherchons nos futurs collaborateurs.Vous pensez avoir l’âme d’un super-héros de la vente ? Lancez-vous et rejoignez l’un de nos services : commercial ou back-office.</p>
                 <Button text={"Nous rejoindre"} setHover={setCursorHovering} />
             </div>
