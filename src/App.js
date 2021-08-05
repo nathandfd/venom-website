@@ -23,9 +23,10 @@ function Background(props) {
       <points
           {...props}
           ref={mesh}
-          scale={active ? 1.5 : 1}
+          // position={[0,0,-4]}
           >
         <sphereGeometry args={[4, 70,70]} />
+        {/*  <torusGeometry args={[4,2,30,100]}/>*/}
         <pointsMaterial color={'white'} size={0.02} />
       </points>
   )
