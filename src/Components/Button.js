@@ -7,6 +7,7 @@ export const Button = (props)=>{
             <button
                 onMouseEnter={()=>{props.setHover(true)}}
                 onMouseLeave={()=>{props.setHover(false)}}
+                onClick={()=>{props.onClick(true)}}
             >
                 {props.text}
             </button>

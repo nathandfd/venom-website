@@ -8,13 +8,30 @@ import {TextureLoader} from "three";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CSSRulePlugin } from "gsap/CSSRulePlugin";
 import {Link} from "./Components/Link";
+import {ReadingMenu} from "./Components/ReadingMenu";
 
 gsap.registerPlugin(ScrollTrigger, CSSRulePlugin);
+
+const completeText = {
+    presentation:{
+        title:"Qui sommes-nous ?",
+        text: "Depuis 2012, année de sa création, Venom, réseau de distribution commercial, est partenaire d'ENGIE (anciennement GDF Suez). Au travers de ces années d'expérience, une seule volonté : celle de permettre aux consommateurs d'avoir accès à une énergie de qualité à un tarif abordable. Venom est également présent sur des marchés porteurs tels que l'assurance et la presse. Notre société représente ainsi un apport de plus de 12 000 nouveaux clients pour nos partenaires. Nous mobilisons ainsi nos forces de vente au travers de toute la France. Ces dernières sont chargées de promouvoir les offres de nos partenaires, aux particuliers, mais aussi aux professionnels, dans le but de leur permettre de réaliser des économies. Ainsi, nous recrutons des commerciaux partout en France afin de mener à bien ces objectifs."
+    },
+    partenaire:{
+        title:"Partenaire",
+        text:"lorem lorem"
+    },
+    recrutement:{
+        title:"Recrutement",
+        text:"lorem lorem"
+    }
+}
 
 function Background(props) {
   const mesh = useRef()
   const [hovered, setHover] = useState(false)
   const [active, setActive] = useState(false)
+
   useFrame((state, delta) => {
       mesh.current.rotation.y += 0.0005
   })
@@ -59,6 +76,13 @@ function App() {
     const parallaxObjParent = useRef()
     const [cursorHovering, setCursorHovering] = useState(false)
     const [parallaxObjLoaded, setParallaxObjLoaded] = useState(false)
+    const [menuVisibility, setVisibility] = useState(false)
+    const [sectionText, setSectionText] = useState("presentation")
+
+    const setMenuVisibility = (sectionText)=>{
+        setSectionText(sectionText)
+        setVisibility(true)
+    }
 
     useEffect(()=>{
         if (parallaxObjLoaded) {
@@ -102,7 +126,6 @@ function App() {
                 paddingRight: 14,
                 paddingLeft: 14,
                 marginLeft:-15,
-                ease: "back",
                 duration: .5
             })
         }
@@ -111,7 +134,6 @@ function App() {
                 paddingRight: 0,
                 paddingLeft: 0,
                 marginLeft:0,
-                ease: "back",
                 duration: .5
             })
         }
@@ -148,7 +170,8 @@ function App() {
                 .fromTo('.header .navbar',{translateY:0},{translateY:'-100%', duration:1, ease:"none"},'<')
                 .fromTo('.header .scroll-down',{translateY:0},{translateY:'120%', duration:1, ease:"none"},'<')
                 .set('.section1',{visibility:'visible'},'<')
-                .fromTo('.section1',{opacity:0},{opacity:1,duration:1, onStart:()=>{beforeLineAnimation.pause(0)}, onComplete:()=>{beforeLineAnimation.resume()}},'<0.7')
+                .fromTo('.section1',{opacity:0},{opacity:1,duration:1, onStart:()=>{beforeLineAnimation.pause(0)}, onComplete:()=>{beforeLineAnimation.resume()}},'<0.3')
+                .fromTo('.header', {pointerEvents:'auto'},{pointerEvents:'none', duration:0},'<')
                 .set('.header',{visibility:'hidden'})
                 .to('.section1',{opacity:0, duration:1, delay:1})
                 // .fromTo(h1Before,{cssRule:{width:'95%'}},{cssRule:{width:'0%'}, duration:0.5},'<-=0.5')
@@ -203,21 +226,21 @@ function App() {
             <div className="floating-text floating-left">
                 <h1 className={"sectionTitle"}>Présentation</h1>
                 <p>VENOM est un réseau de distribution commercial qui est présent sur des marchés porteurs tels que la fourniture d’énergie, l’assurance ou encore la presse. Nous proposons par l’intermédiaire de nos forces de vente les offres les plus compétitives du marché actuel.</p>
-                <Button text={"Découvrir"} setHover={setCursorHovering} />
+                <Button text={"Découvrir"} setHover={setCursorHovering} onClick={()=>{setMenuVisibility('presentation')}} />
             </div>
         </div>
         <div className="section section2">
             <div className="floating-text floating-right">
                 <h1 className={"sectionTitle"}>Partenaire</h1>
                 <p>VENOM est partenaire d’ENGIE, fournisseur historique de gaz. Notre seule volonté est de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. C’est pourquoi nous mobilisons nos forces de vente afin de promouvoir les offres d’ENGIE.</p>
-                <Button text={"En savoir plus"} setHover={setCursorHovering} />
+                <Button text={"En savoir plus"} setHover={setCursorHovering} onClick={()=>{setMenuVisibility('partenaire')}} />
             </div>
         </div>
         <div className="section section3">
             <div className="floating-text floating-left">
                 <h1 className={"sectionTitle"}>Recrutement</h1>
                 <p>Venom recrute à travers toute la France pour mener à bien ses objectifs. Conseillers Commerciaux, Managers Commerciaux ou encore Directeurs d’agences, nous recherchons nos futurs collaborateurs.Vous pensez avoir l’âme d’un super-héros de la vente ? Lancez-vous et rejoignez l’un de nos services : commercial ou back-office.</p>
-                <Button text={"Nous rejoindre"} setHover={setCursorHovering} />
+                <Button text={"Nous rejoindre"} setHover={setCursorHovering} onClick={()=>{setMenuVisibility('recrutement')}} />
             </div>
         </div>
       <div className={"canvas"}>
@@ -239,7 +262,7 @@ function App() {
             <div className="hexagon"></div>
             <div className="hexagon"></div>
         </div>
-
+        <ReadingMenu text={completeText[sectionText]} visibility={menuVisibility} setVisibility={setVisibility} onHover={setCursorHovering}/>
     </div>
   );
 }

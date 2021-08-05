@@ -1,5 +1,5 @@
 :root{
-  --cursor-color: red;
+  --cursor-color: #b800ff;
   cursor: none;
 }
 
@@ -65,6 +65,7 @@
   z-index: 250;
   height: 100vh;
   width: 100%;
+  pointer-events: auto;
 }
 
 .header h1{
