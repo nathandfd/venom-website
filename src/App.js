@@ -69,6 +69,33 @@ const ImageRect = (props)=>{
     )
 }
 
+const VideoRect = (props)=>{
+    let [imageWidth, setImageWidth] = useState(1280)
+    let [imageHeight, setImageHeight] = useState(720)
+    const rectWidth = 1.6
+    const [video] = useState(()=>{
+        const vid = document.createElement('video')
+        vid.src = '/video-presentation.mov'
+        vid.muted = true
+        vid.loop = true
+        return vid
+    })
+
+    useEffect(()=>{
+        props.loaded(true)
+        video.play()
+    }, [video])
+
+    return(
+        <mesh ref={props.reference} {...props}>
+            <planeGeometry args={[rectWidth,rectWidth*(imageHeight/imageWidth)]}/>
+            <meshBasicMaterial>
+                <videoTexture attach={"map"} args={[video]} />
+            </meshBasicMaterial>
+        </mesh>
+    )
+}
+
 function App() {
     const cursor = useRef()
     const follower = useRef()
@@ -249,8 +276,8 @@ function App() {
               <Background position={[0,0,4.5]}/>
               <Suspense fallback={null}>
                   <group ref={parallaxObjParent}>
-                      <ImageRect imageLink={'/buisness.jpg'} loaded={setParallaxObjLoaded} reference={parallaxObj} position={[0.3,-0.1,4]}/>
-                      <ImageRect imageLink={'/capybara.jpg'} loaded={()=>{}} reference={parallaxObj} rotation={[0,0,0.1]} position={[0.3,-0.1,3.9]}/>
+                      <VideoRect loaded={setParallaxObjLoaded} reference={parallaxObj} position={[0.3,-0.1,4]}/>
+                      <ImageRect imageLink={'/buisness.jpg'} loaded={()=>{}} reference={parallaxObj} rotation={[0,0,0.1]} position={[0.3,-0.1,3.9]}/>
                       <ImageRect imageLink={'/office.jpg'} loaded={()=>{}} reference={parallaxObj} rotation={[0,0,-0.1]} position={[0.3,-0.1,3.9]}/>
                   </group>
               </Suspense>
