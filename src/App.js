@@ -35,6 +35,22 @@ const completeText = {
     recrutement:{
         title:"Recrutement",
         text:"lorem lorem"
+    },
+    contact:{
+        title:"Nous contacter",
+        text:
+            <>
+                <form>
+                    <div className={"row"}>
+                        <input type="text" name={"name"} placeholder={"Nom"}/>
+                        <input type="text" name={"firstname"} placeholder={"Prénom"}/>
+                    </div>
+                    <input type="mail" name={"email"} placeholder={"E-mail"}/>
+                    <input type="text" name={"sujet"} placeholder={"Sujet"}/>
+                    <input type="text" name={"message"} placeholder={"votre message..."}/>
+                    <input type="submit" value={"Envoyer"}/>
+                </form>
+            </>
     }
 }
 
@@ -285,13 +301,13 @@ function App() {
                     <h1 className={"sectionTitle"}>Recrutement</h1>
                     <p>Venom recrute à travers toute la France pour mener à bien ses objectifs. Conseillers Commerciaux, Managers Commerciaux ou encore Directeurs d’agences, nous recherchons nos futurs collaborateurs.Vous pensez avoir l’âme d’un super-héros de la vente ? Lancez-vous et rejoignez l’un de nos services : commercial ou back-office.</p>
                     <Button text={"En savoir plus"} setHover={setCursorHovering} onClick={()=>{setMenuVisibility('recrutement')}} />
-                    <Button text={"Nous rejoindre"} setHover={setCursorHovering} onClick={()=>{setMenuVisibility('recrutement')}} />
+                    <Button text={"Nous rejoindre"} setHover={setCursorHovering} onClick={()=>{setMenuVisibility('contact')}} />
                 </div>
             </div>
         </div>
-        <footer>
-            © Copyright 2021 Venom. All rights reserved.
-        </footer>
+        {/*<div className={"footer"}>*/}
+        {/*    © Copyright 2021 Venom. All rights reserved.*/}
+        {/*</div>*/}
       <div className={"canvas"}>
           <Canvas linear={true} dpr={Math.max(window.devicePixelRatio, 2)}>
               <ambientLight color={"#fff"}/>

@@ -3,7 +3,7 @@
   cursor: none;
 }
 
-footer{
+.footer{
   color: white;
   display: flex;
   align-items: center;
@@ -180,6 +180,38 @@ footer{
   border-right: 2px solid white;
   transform: rotateZ(45deg);
 }
+
+/* Form */
+
+form{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 50%;
+  margin: 2rem auto 0 auto;
+
+}
+
+form input{
+  margin-bottom: 2rem;
+  margin-right: 2rem;
+  border: 1px darkred solid;
+  background-color: transparent;
+  padding: .5rem;
+  font-size: 1.2em;
+  outline: none;
+  color: white;
+}
+
+form.row{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/**/
 
 /*Cursor*/
 
