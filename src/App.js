@@ -10,7 +10,12 @@ import { CSSRulePlugin } from "gsap/CSSRulePlugin";
 import {Link} from "./Components/Link";
 import {ReadingMenu} from "./Components/ReadingMenu";
 
-gsap.registerPlugin(ScrollTrigger, CSSRulePlugin);
+gsap.registerPlugin(ScrollTrigger, CSSRulePlugin)
+
+const video = document.createElement('video')
+video.src = '/video-presentation.mov'
+video.muted = true
+video.loop = true
 
 const completeText = {
     presentation:{
@@ -39,7 +44,7 @@ function Background(props) {
   const [active, setActive] = useState(false)
 
   useFrame((state, delta) => {
-      mesh.current.rotation.y += 0.00005
+      mesh.current.rotation.y += 0.0005
   })
 
   return (
@@ -79,24 +84,28 @@ const VideoRect = (props)=>{
     let [imageWidth, setImageWidth] = useState(1280)
     let [imageHeight, setImageHeight] = useState(720)
     const rectWidth = 1.6
-    const [video] = useState(()=>{
-        const vid = document.createElement('video')
-        vid.src = '/video-presentation.mov'
-        vid.muted = true
-        vid.loop = true
-        return vid
-    })
+    const videoTexture = useRef()
+    // const [videoTex] = useState(video)
+
+    // function  updateVideoTex() {
+    //     if ( vid.readyState === vid.HAVE_ENOUGH_DATA ) {
+    //         videoTexture.current.needsUpdate = true;
+    //     }
+    // }
 
     useEffect(()=>{
         props.loaded(true)
-        video.play()
-    }, [video])
+        // setInterval(
+        //     function () {
+        //         updateVideoTex();
+        //         }, 400 );
+    }, [])
 
     return(
         <mesh ref={props.reference} {...props}>
             <planeGeometry args={[rectWidth,rectWidth*(imageHeight/imageWidth)]}/>
             <meshBasicMaterial>
-                <videoTexture attach={"map"} args={[video]} />
+                <videoTexture ref={videoTexture} attach={"map"} args={[video]} />
             </meshBasicMaterial>
         </mesh>
     )
@@ -133,12 +142,9 @@ function App() {
                 gsap.to(parallaxObjParent.current.children, {
                     onUpdate: () => {
                         let tempSortedArray = [...parallaxObjParent.current.children]
-                        tempSortedArray.sort((a, b) => {
-                            return b.position.z - a.position.z
-                        })
-                        tempSortedArray.forEach((child, index) => {
-                            child.position.set(-(e.clientX * (0.02 / (index + 1)) / window.innerWidth) + 0.5, (e.clientY * (0.02 / (index + 1)) / window.innerHeight) - 0.1)
-                        })
+                        for (let i = 0; i < tempSortedArray.length; i++){
+                            tempSortedArray[i].position.set(-(e.clientX * (0.02) / window.innerWidth) + 0.5, (e.clientY * (0.02) / window.innerHeight) - 0.1)
+                        }
                     }
                 })
                 gsap.to('.floating-text.floating-left', {
@@ -153,7 +159,7 @@ function App() {
                     right: (e.clientX * 2 / window.innerWidth) + 5 + 'vw',
                     bottom: (e.clientY * 1 / window.innerHeight) + 10 + 'vh',
                 })
-            })
+            }, {passive:true, capture:true})
         }
     },[parallaxObjLoaded])
 
@@ -205,14 +211,14 @@ function App() {
                 .fromTo('.header .navbar',{translateY:0},{translateY:'-100%', duration:1, ease:"none"},'<')
                 .fromTo('.header .scroll-down',{translateY:0},{translateY:'120%', duration:1, ease:"none"},'<')
                 .set('.section1',{visibility:'visible'},'<')
-                .fromTo('.section1',{opacity:0},{opacity:1,duration:1, onStart:()=>{beforeLineAnimation.pause(0)}, onComplete:()=>{beforeLineAnimation.resume()}},'<0.3')
+                .fromTo('.section1',{opacity:0},{opacity:1,duration:1, onComplete:()=>{beforeLineAnimation.resume(); video.fastSeek(0); video.play()}},'<0.3')
                 .fromTo('.header', {pointerEvents:'auto'},{pointerEvents:'none', duration:0},'<')
                 .set('.header',{visibility:'hidden'})
                 .to('.section1',{opacity:0, duration:1, delay:1})
                 .set('.section1',{visibility:'hidden'})
                 .to(parallaxObjParent.current.position,{x:-1, duration:1})
                 .to(parallaxObjParent.current.children[1].position,{z:'+=0.1', duration:1},'<')
-                .to(parallaxObjParent.current.children[0].position,{z:'-=0.1', duration:1},'<')
+                .to(parallaxObjParent.current.children[0].position,{z:'-=0.1', duration:1, onReverseComplete:()=>{video.play()}, onComplete:()=>{video.fastSeek(0);video.pause()}},'<')
                 .set('.section2',{visibility:'visible'})
                 .fromTo('.section2',{opacity:0},{opacity:1, duration:1, onStart:()=>{beforeLineAnimation.pause(0)}, onComplete:()=>{beforeLineAnimation.resume()}})
                 .to('.section2',{opacity:0, duration:1, delay:1})
@@ -276,17 +282,21 @@ function App() {
                 <div className="floating-text floating-left">
                     <h1 className={"sectionTitle"}>Recrutement</h1>
                     <p>Venom recrute à travers toute la France pour mener à bien ses objectifs. Conseillers Commerciaux, Managers Commerciaux ou encore Directeurs d’agences, nous recherchons nos futurs collaborateurs.Vous pensez avoir l’âme d’un super-héros de la vente ? Lancez-vous et rejoignez l’un de nos services : commercial ou back-office.</p>
+                    <Button text={"En savoir plus"} setHover={setCursorHovering} onClick={()=>{setMenuVisibility('recrutement')}} />
                     <Button text={"Nous rejoindre"} setHover={setCursorHovering} onClick={()=>{setMenuVisibility('recrutement')}} />
                 </div>
             </div>
         </div>
+        <footer>
+            © Copyright 2021 Venom. All rights reserved.
+        </footer>
       <div className={"canvas"}>
           <Canvas linear={true} dpr={Math.max(window.devicePixelRatio, 2)}>
               <ambientLight color={"#fff"}/>
               <Background position={[0,0,4.5]}/>
               <Suspense fallback={null}>
                   <group ref={parallaxObjParent}>
-                      <VideoRect loaded={setParallaxObjLoaded} reference={parallaxObj} position={[0.3,-0.1,4]}/>
+                      <VideoRect imageLink={'/buisness.jpg'} loaded={setParallaxObjLoaded} reference={parallaxObj} position={[0.3,-0.1,4]}/>
                       <ImageRect imageLink={'/buisness.jpg'} loaded={()=>{}} reference={parallaxObj} rotation={[0,0,0.1]} position={[0.3,-0.1,3.9]}/>
                       <ImageRect imageLink={'/office.jpg'} loaded={()=>{}} reference={parallaxObj} rotation={[0,0,-0.1]} position={[0.3,-0.1,3.9]}/>
                   </group>

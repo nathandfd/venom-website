@@ -3,6 +3,14 @@
   cursor: none;
 }
 
+footer{
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+}
+
 .section{
   height: 100vh;
   width: 100%;
