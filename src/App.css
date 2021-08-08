@@ -192,6 +192,7 @@ footer{
   transition: width .3s;
   transform-origin: center center;
   animation: spin infinite 10s forwards linear;
+  box-sizing: content-box;
 }
 
 #cursor.hovering{
