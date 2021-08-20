@@ -1,5 +1,4 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import {Canvas, useFrame, useLoader} from '@react-three/fiber'
 import {useEffect, useRef, useState, Suspense} from "react";
 import {gsap} from 'gsap'
@@ -13,51 +12,9 @@ import {ReadingMenu} from "./Components/ReadingMenu";
 gsap.registerPlugin(ScrollTrigger, CSSRulePlugin)
 
 const video = document.createElement('video')
-video.src = '/video-presentation.mov'
-video.muted = true
-video.loop = true
-
-const completeText = {
-    presentation:{
-        title:"Qui sommes-nous ?",
-        text:
-            <>
-                <h3>Notre société</h3>
-                <p>
-                    Depuis 2012, année de sa création, VENOM, réseau de distribution commercial, est partenaire d’<bold>ENGIE</bold> (anciennement GDF Suez). Au travers de ces années d’expérience, une seule volonté : celle de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. VENOM est également présent sur des marchés porteurs tels que l’assurance et la presse. Notre société représente ainsi un apport de plus de 30 000 nouveaux clients pour nos partenaires.
-                </p>
-            </>
-    },
-    partenaire:{
-        title:"Partenaire",
-        text:<h3>Salut</h3>
-    },
-    recrutement:{
-        title:"Recrutement",
-        text:"lorem lorem"
-    },
-    contact:{
-        title:"Nous contacter",
-        text:
-            <>
-                <form>
-                    <div className={"row"}>
-                        <input type="text" name={"name"} placeholder={"Nom"}/>
-                        <input type="text" name={"firstname"} placeholder={"Prénom"}/>
-                    </div>
-                    <input type="mail" name={"email"} placeholder={"E-mail"}/>
-                    <input type="text" name={"sujet"} placeholder={"Sujet"}/>
-                    <input type="text" name={"message"} placeholder={"votre message..."}/>
-                    <input type="submit" value={"Envoyer"}/>
-                </form>
-            </>
-    }
-}
 
 function Background(props) {
   const mesh = useRef()
-  const [hovered, setHover] = useState(false)
-  const [active, setActive] = useState(false)
 
   useFrame((state, delta) => {
       mesh.current.rotation.y += 0.0005
@@ -67,9 +24,8 @@ function Background(props) {
       <points
           {...props}
           ref={mesh}
-          // position={[0,0,-4]}
           >
-        <sphereGeometry args={[4, 70,70]} />
+        <sphereBufferGeometry args={[4, 40,40]} />
         {/*  <torusGeometry args={[4,2,30,100]}/>*/}
         <pointsMaterial color={'white'} size={0.02} />
       </points>
@@ -90,47 +46,39 @@ const ImageRect = (props)=>{
 
     return(
         <mesh ref={props.reference} {...props}>
-            <planeGeometry args={[rectWidth,rectWidth*(imageHeight/imageWidth)]}/>
-            <meshBasicMaterial map={texture}/>
+            <planeBufferGeometry attach={"geometry"} args={[rectWidth,rectWidth*(imageHeight/imageWidth)]}/>
+            <meshBasicMaterial attach={"material"} map={texture}/>
         </mesh>
     )
 }
 
 const VideoRect = (props)=>{
-    let [imageWidth, setImageWidth] = useState(1280)
-    let [imageHeight, setImageHeight] = useState(720)
-    const rectWidth = 1.6
     const videoTexture = useRef()
-    // const [videoTex] = useState(video)
 
-    // function  updateVideoTex() {
-    //     if ( vid.readyState === vid.HAVE_ENOUGH_DATA ) {
-    //         videoTexture.current.needsUpdate = true;
-    //     }
-    // }
+    const imageWidth = 1280
+    const imageHeight = 720
+    const rectWidth = 1.6
 
     useEffect(()=>{
+        video.src = '/video-presentation.mp4'
+        video.muted = true
+        video.loop = true
         props.loaded(true)
-        // setInterval(
-        //     function () {
-        //         updateVideoTex();
-        //         }, 400 );
     }, [])
 
     return(
         <mesh ref={props.reference} {...props}>
-            <planeGeometry args={[rectWidth,rectWidth*(imageHeight/imageWidth)]}/>
-            <meshBasicMaterial>
+            <planeBufferGeometry args={[rectWidth,rectWidth*(imageHeight/imageWidth)]}/>
+            <meshBasicMaterial attach={"material"}>
                 <videoTexture ref={videoTexture} attach={"map"} args={[video]} />
             </meshBasicMaterial>
         </mesh>
     )
 }
 
-function App() {
+function App({completeText}) {
     const cursor = useRef()
     const follower = useRef()
-    const parallaxObj = useRef()
     const parallaxObjParent = useRef()
     const [cursorHovering, setCursorHovering] = useState(false)
     const [parallaxObjLoaded, setParallaxObjLoaded] = useState(false)
@@ -143,41 +91,36 @@ function App() {
     }
 
     useEffect(()=>{
-        if (parallaxObjLoaded) {
             document.addEventListener('mousemove', (e) => {
-                gsap.to(cursor.current, {
+                gsap.set(cursor.current, {
                     left: e.clientX,
                     top: e.clientY,
-                    duration: .2
                 })
                 gsap.to(follower.current, {
                     left: e.clientX,
                     top: e.clientY,
                     duration: 1
                 })
-                gsap.to(parallaxObjParent.current.children, {
-                    onUpdate: () => {
-                        let tempSortedArray = [...parallaxObjParent.current.children]
-                        for (let i = 0; i < tempSortedArray.length; i++){
-                            tempSortedArray[i].position.set(-(e.clientX * (0.02) / window.innerWidth) + 0.5, (e.clientY * (0.02) / window.innerHeight) - 0.1)
+                if (parallaxObjParent.current.children){
+                    gsap.to(parallaxObjParent.current.children, {
+                        onUpdate: () => {
+                            let tempSortedArray = [...parallaxObjParent.current.children]
+                            for (let i = 0; i < tempSortedArray.length; i++){
+                                tempSortedArray[i].position.set(-(e.clientX * (0.02) / window.innerWidth) + 0.5, (e.clientY * (0.02) / window.innerHeight) - 0.1)
+                            }
                         }
-                    }
-                })
+                    })
+                }
                 gsap.to('.floating-text.floating-left', {
-                    // left: -(e.clientX * 2 / window.innerWidth) + 10 + 'rem',
-                    // top: -(e.clientY * 1 / window.innerHeight) + 5 + 'rem',
                     left: -(e.clientX * 2 / window.innerWidth) + 10 + 'vw',
                     top: -(e.clientY * 1 / window.innerHeight) + 10 + 'vh',
                 })
                 gsap.to('.floating-text.floating-right', {
-                    // right: (e.clientX * 2 / window.innerWidth) + 5 + 'rem',
-                    // bottom: (e.clientY * 1 / window.innerHeight) + 5 + 'rem',
                     right: (e.clientX * 2 / window.innerWidth) + 5 + 'vw',
                     bottom: (e.clientY * 1 / window.innerHeight) + 10 + 'vh',
                 })
             }, {passive:true, capture:true})
-        }
-    },[parallaxObjLoaded])
+    },[])
 
     useEffect(()=>{
         if (cursorHovering){
@@ -210,7 +153,7 @@ function App() {
                     pin: true,
                     start: "top top",
                      end: "+=6000",
-                    scrub: 0.1,
+                    scrub: true,
                 }
             })
 
@@ -224,10 +167,10 @@ function App() {
             timeline
                 .set(parallaxObjParent.current.position,{x:0})
                 .set('.header',{visibility:'visible'},'<')
-                .fromTo('.header .background1',{translateX:0},{translateX:'-60%', duration:1, ease:"none"})
-                .fromTo('.header .background2',{translateX:0},{translateX:'60%', duration:1, ease:"none"},'<')
-                .fromTo('.header .navbar',{translateY:0},{translateY:'-100%', duration:1, ease:"none"},'<')
-                .fromTo('.header .scroll-down',{translateY:0},{translateY:'120%', duration:1, ease:"none"},'<')
+                .fromTo('.header .background1',{xPercent:0},{xPercent:-60, duration:1, ease:"none"})
+                .fromTo('.header .background2',{xPercent:0},{xPercent:60, duration:1, ease:"none"},'<')
+                .fromTo('.header .navbar',{yPercent:0},{yPercent:-100, duration:1, ease:"none"},'<')
+                .fromTo('.header .scroll-down',{yPercent:0},{yPercent:120, duration:1, ease:"none"},'<')
                 .set('.section1',{visibility:'visible'},'<')
                 .fromTo('.section1',{opacity:0},{opacity:1,duration:1, onComplete:()=>{beforeLineAnimation.resume(); video.fastSeek(0); video.play()}},'<0.3')
                 .fromTo('.header', {pointerEvents:'auto'},{pointerEvents:'none', duration:0},'<')
@@ -309,14 +252,14 @@ function App() {
         {/*    © Copyright 2021 Venom. All rights reserved.*/}
         {/*</div>*/}
       <div className={"canvas"}>
-          <Canvas linear={true} dpr={Math.max(window.devicePixelRatio, 2)}>
-              <ambientLight color={"#fff"}/>
+          <Canvas linear={true} dpr={Math.max(window.devicePixelRatio, 1)}>
+              {/*<ambientLight color={"#fff"}/>*/}
               <Background position={[0,0,4.5]}/>
               <Suspense fallback={null}>
                   <group ref={parallaxObjParent}>
-                      <VideoRect imageLink={'/buisness.jpg'} loaded={setParallaxObjLoaded} reference={parallaxObj} position={[0.3,-0.1,4]}/>
-                      <ImageRect imageLink={'/buisness.jpg'} loaded={()=>{}} reference={parallaxObj} rotation={[0,0,0.1]} position={[0.3,-0.1,3.9]}/>
-                      <ImageRect imageLink={'/office.jpg'} loaded={()=>{}} reference={parallaxObj} rotation={[0,0,-0.1]} position={[0.3,-0.1,3.9]}/>
+                      <VideoRect loaded={setParallaxObjLoaded} position={[0.3,-0.1,4]}/>
+                      <ImageRect imageLink={'/buisness.jpg'} loaded={()=>{}} rotation={[0,0,0.1]} position={[0.3,-0.1,3.9]}/>
+                      <ImageRect imageLink={'/office.jpg'} loaded={()=>{}} rotation={[0,0,-0.1]} position={[0.3,-0.1,3.9]}/>
                   </group>
               </Suspense>
           </Canvas>
