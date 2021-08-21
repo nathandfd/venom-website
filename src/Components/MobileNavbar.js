@@ -8,27 +8,34 @@ export const MobileNavbar = ()=>{
     const menu = useRef()
 
     const closeMenu = ()=>{
-        gsap.to(menu.current, {
-            xPercent: 100,
-            duration: .3
-        })
-    }
+        document.getElementsByTagName('html')[0].style.overflow = "auto"
 
-    const openMenu = ()=>{
         gsap.to(menu.current, {
             xPercent: 0,
             duration: .3
         })
     }
 
+    const openMenu = ()=>{
+        document.getElementsByTagName('html')[0].style.overflow = "hidden"
+
+        gsap.to(menu.current, {
+            xPercent: -100,
+            duration: .3
+        })
+    }
+
     return(
         <div className={"MobileNavbar"}>
-            <div className={"openButton"} onClick={openMenu}>
-                <div></div>
-                <div></div>
-                <div></div>
+            <div className={"navbar"}>
+                <img src="/venom-logo.png" alt=""/>
+                <div className={"openButton"} onClick={openMenu}>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
             </div>
-            <div className="navbar" ref={menu}>
+            <div className="menu" ref={menu}>
                 <div className="blurred-background"></div>
                 <div className={"close"} onClick={closeMenu}>
                     <svg height="329pt" viewBox="0 0 329.26933 329" width="329pt" xmlns="http://www.w3.org/2000/svg">

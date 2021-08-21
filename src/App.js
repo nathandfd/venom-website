@@ -85,6 +85,7 @@ function App({completeText}) {
     const [menuVisibility, setVisibility] = useState(false)
     const [sectionText, setSectionText] = useState("presentation")
 
+
     const setMenuVisibility = (sectionText)=>{
         setSectionText(sectionText)
         setVisibility(true)
@@ -92,6 +93,8 @@ function App({completeText}) {
 
     useEffect(()=>{
             document.addEventListener('mousemove', (e) => {
+                e.stopPropagation()
+                e.preventDefault()
                 gsap.set(cursor.current, {
                     left: e.clientX,
                     top: e.clientY,
@@ -145,7 +148,14 @@ function App({completeText}) {
 
     useEffect(()=>{
         if (parallaxObjLoaded){
-            const h1Before = CSSRulePlugin.getRule('.floating-text h1:before')
+            console.log("suce")
+            const h1Before = CSSRulePlugin.getRule('.App .floating-text h1:before')
+            const h1BeforeAnimation = gsap.timeline({
+                paused:true,
+            })
+
+            h1BeforeAnimation
+                .fromTo(h1Before,{cssRule:{width:'0%'}},{cssRule:{width:'95%'}, duration:.75, ease:"power4"})
 
             const timeline = gsap.timeline({
                 scrollTrigger:{
@@ -157,13 +167,6 @@ function App({completeText}) {
                 }
             })
 
-            const beforeLineAnimation = gsap.timeline({
-                paused:true,
-            })
-
-            beforeLineAnimation
-                .fromTo(h1Before,{cssRule:{width:'0%'}},{cssRule:{width:'95%'}, duration:.75, ease:"power4"})
-
             timeline
                 .set(parallaxObjParent.current.position,{x:0})
                 .set('.header',{visibility:'visible'},'<')
@@ -172,7 +175,7 @@ function App({completeText}) {
                 .fromTo('.header .navbar',{yPercent:0},{yPercent:-100, duration:1, ease:"none"},'<')
                 .fromTo('.header .scroll-down',{yPercent:0},{yPercent:120, duration:1, ease:"none"},'<')
                 .set('.section1',{visibility:'visible'},'<')
-                .fromTo('.section1',{opacity:0},{opacity:1,duration:1, onComplete:()=>{beforeLineAnimation.resume(); video.fastSeek(0); video.play()}},'<0.3')
+                .fromTo('.section1',{opacity:0},{opacity:1,duration:1, onComplete:()=>{h1BeforeAnimation.resume(); video.fastSeek(0); video.play()}},'<0.3')
                 .fromTo('.header', {pointerEvents:'auto'},{pointerEvents:'none', duration:0},'<')
                 .set('.header',{visibility:'hidden'})
                 .to('.section1',{opacity:0, duration:1, delay:1})
@@ -181,14 +184,14 @@ function App({completeText}) {
                 .to(parallaxObjParent.current.children[1].position,{z:'+=0.1', duration:1},'<')
                 .to(parallaxObjParent.current.children[0].position,{z:'-=0.1', duration:1, onReverseComplete:()=>{video.play()}, onComplete:()=>{video.fastSeek(0);video.pause()}},'<')
                 .set('.section2',{visibility:'visible'})
-                .fromTo('.section2',{opacity:0},{opacity:1, duration:1, onStart:()=>{beforeLineAnimation.pause(0)}, onComplete:()=>{beforeLineAnimation.resume()}})
+                .fromTo('.section2',{opacity:0},{opacity:1, duration:1, onStart:()=>{h1BeforeAnimation.pause(0)}, onComplete:()=>{h1BeforeAnimation.resume()}})
                 .to('.section2',{opacity:0, duration:1, delay:1})
                 .set('.section2',{visibility:'hidden'})
                 .to(parallaxObjParent.current.position,{x:0, duration:1})
                 .to(parallaxObjParent.current.children[2].position,{z:'+=0.1', duration:1},'<')
                 .to(parallaxObjParent.current.children[1].position,{z:'-=0.1', duration:1},'<')
                 .set('.section3',{visibility:'visible'})
-                .fromTo('.section3',{opacity:0},{opacity:1, duration:1, onStart:()=>{beforeLineAnimation.pause(0)}, onComplete:()=>{beforeLineAnimation.resume()}})
+                .fromTo('.section3',{opacity:0},{opacity:1, duration:1, onStart:()=>{h1BeforeAnimation.pause(0)}, onComplete:()=>{h1BeforeAnimation.resume()}})
         }
     },[parallaxObjLoaded])
 

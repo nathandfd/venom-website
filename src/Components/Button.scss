@@ -12,5 +12,15 @@ button{
 
 button:hover{
     padding: 0.8rem 1rem;
-    cursor: none;
+}
+
+.desktopButton{
+    button:hover{
+        cursor: none;
+    }
+}
+
+.mobileButton{
+    width: max-content;
+    align-self: center;
 }

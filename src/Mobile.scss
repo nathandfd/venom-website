@@ -1,6 +1,26 @@
 .Mobile{
+
+  color: white;
+  padding-top: 4rem;
+
   *{
     box-sizing: border-box;
   }
-  color: white;
+
+  h1{
+    text-align: center;
+  }
+
+  .section{
+    .floating-text{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  .section, .header{
+    min-height: 100vh;
+    padding: 1rem;
+  }
 }

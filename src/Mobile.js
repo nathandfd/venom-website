@@ -4,6 +4,8 @@ import {MobileButton} from "./Components/Button";
 import {ReadingMenu} from "./Components/ReadingMenu";
 import {useState} from "react";
 import {MobileNavbar} from "./Components/MobileNavbar";
+import {Canvas} from "@react-three/fiber";
+import {VenomChibi} from "./Components/VenomChibi";
 
 export const Mobile = ({completeText})=>{
 
@@ -17,14 +19,8 @@ export const Mobile = ({completeText})=>{
 
     return(
         <div className="Mobile" style={{'backgroundColor':'#121212'}}>
+            <MobileNavbar/>
             <div className="header">
-                <MobileNavbar/>
-                <div className={"scroll-down"}>
-                    <p>Descend pour en savoir plus</p>
-                    <div className="chevron">
-                        <div className="vector"></div>
-                    </div>
-                </div>
                 <div className="background">
                     <div className="background1">
                         <h1>
@@ -33,6 +29,13 @@ export const Mobile = ({completeText})=>{
                     </div>
                     <div className="background2"></div>
                 </div>
+                <div className={"scroll-down"}>
+                    <p>Descend pour en savoir plus</p>
+                    <div className="chevron">
+                        <div className="vector"></div>
+                    </div>
+                </div>
+                <VenomChibi />
             </div>
             <div className="section section1">
                 <div className={"centering-div"}>
