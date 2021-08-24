@@ -2,20 +2,57 @@ import './Mobile.scss'
 
 import {MobileButton} from "./Components/Button";
 import {ReadingMenu} from "./Components/ReadingMenu";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {MobileNavbar} from "./Components/MobileNavbar";
 import {Canvas} from "@react-three/fiber";
 import {VenomChibi} from "./Components/VenomChibi";
+import {gsap} from "gsap";
 
 export const Mobile = ({completeText})=>{
 
     const [menuVisibility, setVisibility] = useState(false)
     const [sectionText, setSectionText] = useState("presentation")
+    const [isChibiLoaded, setChibiLoaded] = useState(false)
+    const timeline = gsap.timeline({
+        scrollTrigger:{
+            trigger:'.header',
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+        }
+    })
 
     const setMenuVisibility = (sectionText)=>{
         setSectionText(sectionText)
         setVisibility(true)
     }
+
+    const venomChibi = useRef()
+
+    useEffect(()=>{
+        if (isChibiLoaded){
+            timeline.fromTo(venomChibi.current.rotation, {
+                y: -0.1
+            },
+            {
+                y: 0.1
+            })
+
+            timeline.fromTo(venomChibi.current.rotation, {
+                    x: 0.1
+                },
+                {
+                    x: -0.1
+                }, '<')
+
+            timeline.fromTo(venomChibi.current.position, {
+                    y: -0.1
+                },
+                {
+                    y: 0.1
+                }, '<')
+        }
+    }, [isChibiLoaded])
 
     return(
         <div className="Mobile" style={{'backgroundColor':'#121212'}}>
@@ -35,12 +72,13 @@ export const Mobile = ({completeText})=>{
                         <div className="vector"></div>
                     </div>
                 </div>
-                <VenomChibi />
+                <VenomChibi setChibiLoaded={setChibiLoaded} SceneRef={venomChibi} />
             </div>
             <div className="section section1">
                 <div className={"centering-div"}>
                     <div className="floating-text floating-left">
                         <h1 className={"sectionTitle"}>Présentation</h1>
+                        <img src="/office.jpg" alt=""/>
                         <p>VENOM est un réseau de distribution commercial qui est présent sur des marchés porteurs tels que la fourniture d’énergie, l’assurance ou encore la presse. Nous proposons par l’intermédiaire de nos forces de vente les offres les plus compétitives du marché actuel.</p>
                         <MobileButton text={"Découvrir"} onClick={()=>{setMenuVisibility('presentation')}} />
                     </div>
@@ -50,6 +88,7 @@ export const Mobile = ({completeText})=>{
                 <div className="centering-div">
                     <div className="floating-text floating-right">
                         <h1 className={"sectionTitle"}>Partenaire</h1>
+                        <img src="/buisness.jpg" alt=""/>
                         <p>VENOM est partenaire d’ENGIE, fournisseur historique de gaz. Notre seule volonté est de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. C’est pourquoi nous mobilisons nos forces de vente afin de promouvoir les offres d’ENGIE.</p>
                         <MobileButton text={"En savoir plus"} onClick={()=>{setMenuVisibility('partenaire')}} />
                     </div>
@@ -59,9 +98,12 @@ export const Mobile = ({completeText})=>{
                 <div className="centering-div">
                     <div className="floating-text floating-left">
                         <h1 className={"sectionTitle"}>Recrutement</h1>
+                        <img src="/capybara.jpg" alt=""/>
                         <p>Venom recrute à travers toute la France pour mener à bien ses objectifs. Conseillers Commerciaux, Managers Commerciaux ou encore Directeurs d’agences, nous recherchons nos futurs collaborateurs.Vous pensez avoir l’âme d’un super-héros de la vente ? Lancez-vous et rejoignez l’un de nos services : commercial ou back-office.</p>
-                        <MobileButton text={"En savoir plus"} onClick={()=>{setMenuVisibility('recrutement')}} />
-                        <MobileButton text={"Nous rejoindre"} onClick={()=>{setMenuVisibility('contact')}} />
+                        <div className={"double-button"}>
+                            <MobileButton text={"En savoir plus"} onClick={()=>{setMenuVisibility('recrutement')}} />
+                            <MobileButton text={"Nous rejoindre"} onClick={()=>{setMenuVisibility('contact')}} />
+                        </div>
                     </div>
                 </div>
             </div>

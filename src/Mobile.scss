@@ -12,15 +12,69 @@
   }
 
   .section{
+    margin-top: 5rem;
+
+    p{
+      line-height: 1.5em;
+    }
+
     .floating-text{
       display: flex;
       flex-direction: column;
       width: 100%;
     }
+
+    img{
+      width: 80%;
+      height: auto;
+      margin: 0 auto;
+    }
   }
 
   .section, .header{
-    min-height: 100vh;
+    //height: 100vh;
+    position: relative;
     padding: 1rem;
+  }
+
+  .scroll-down{
+    position: absolute;
+    bottom: 10rem;
+    width: 100%;
+    text-align: center;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .vector{
+      width: 20px;
+      height: 20px;
+      border-bottom: 2px solid white;
+      border-left: 2px solid white;
+      transform: rotate(-45deg);
+    }
+  }
+
+  .header{
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    padding-right: 0;
+    height: 100vh;
+
+  }
+
+  canvas{
+    position: relative;
+    z-index: 0;
+  }
+
+  .double-button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
   }
 }

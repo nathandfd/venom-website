@@ -24,8 +24,10 @@ export const ReadingMenu = (props)=>{
                     </linearGradient>
                 </svg>
             </div>
-            <h1>{props.text.title}</h1>
-            <p>{props.text.text}</p>
+            <div className={"reading-menu-body"}>
+                <h1>{props.text.title}</h1>
+                {props.text.text}
+            </div>
         </div>
     )
 }

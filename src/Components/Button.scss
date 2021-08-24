@@ -4,7 +4,7 @@ button{
     border: none;
     border-bottom: darkred 4px solid;
     border-top: darkred 4px solid;
-    font-size: 1.5em;
+    font-size: 1.4em;
     padding: 0.6rem 1rem;
     transition: padding .3s;
     margin-right: 2rem;
@@ -23,4 +23,10 @@ button:hover{
 .mobileButton{
     width: max-content;
     align-self: center;
+}
+
+.Mobile{
+    button{
+        margin-top: 1rem;
+    }
 }
