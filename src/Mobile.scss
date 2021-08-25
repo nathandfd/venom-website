@@ -31,7 +31,7 @@
     }
   }
 
-  .section1{
+  .section1, .section2, .section3{
     h1{
       font-size: 2.6em;
       position: relative;
@@ -42,60 +42,40 @@
       &:before{
         content: '';
         position: absolute;
-        width: 95%;
         height: 60%;
         background-color: darkred;
         top: 20px;
         left: 20px;
         z-index: -1;
+      }
+    }
+  }
+
+  .section1{
+    h1{
+      &:before{
+        width: 95%;
       }
     }
   }
 
   .section2{
     h1{
-      font-size: 2.6em;
-      position: relative;
-      width: max-content;
-      margin: 2rem auto;
-      z-index: 1;
-
       &:before{
-        content: '';
-        position: absolute;
         width: 95%;
-        height: 60%;
-        background-color: darkred;
-        top: 20px;
-        left: 20px;
-        z-index: -1;
       }
     }
   }
 
   .section3{
     h1{
-      font-size: 2.6em;
-      position: relative;
-      width: max-content;
-      margin: 2rem auto;
-      z-index: 1;
-
       &:before{
-        content: '';
-        position: absolute;
         width: 95%;
-        height: 60%;
-        background-color: darkred;
-        top: 20px;
-        left: 20px;
-        z-index: -1;
       }
     }
   }
 
   .section, .header{
-    //height: 100vh;
     position: relative;
     padding: 1rem;
   }
