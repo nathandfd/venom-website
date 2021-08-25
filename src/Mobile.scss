@@ -31,6 +31,69 @@
     }
   }
 
+  .section1{
+    h1{
+      font-size: 2.6em;
+      position: relative;
+      width: max-content;
+      margin: 2rem auto;
+      z-index: 1;
+
+      &:before{
+        content: '';
+        position: absolute;
+        width: 95%;
+        height: 60%;
+        background-color: darkred;
+        top: 20px;
+        left: 20px;
+        z-index: -1;
+      }
+    }
+  }
+
+  .section2{
+    h1{
+      font-size: 2.6em;
+      position: relative;
+      width: max-content;
+      margin: 2rem auto;
+      z-index: 1;
+
+      &:before{
+        content: '';
+        position: absolute;
+        width: 95%;
+        height: 60%;
+        background-color: darkred;
+        top: 20px;
+        left: 20px;
+        z-index: -1;
+      }
+    }
+  }
+
+  .section3{
+    h1{
+      font-size: 2.6em;
+      position: relative;
+      width: max-content;
+      margin: 2rem auto;
+      z-index: 1;
+
+      &:before{
+        content: '';
+        position: absolute;
+        width: 95%;
+        height: 60%;
+        background-color: darkred;
+        top: 20px;
+        left: 20px;
+        z-index: -1;
+      }
+    }
+  }
+
   .section, .header{
     //height: 100vh;
     position: relative;
@@ -63,7 +126,6 @@
     padding-left: 0;
     padding-right: 0;
     height: 100vh;
-
   }
 
   canvas{

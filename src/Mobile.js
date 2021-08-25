@@ -7,6 +7,9 @@ import {MobileNavbar} from "./Components/MobileNavbar";
 import {Canvas} from "@react-three/fiber";
 import {VenomChibi} from "./Components/VenomChibi";
 import {gsap} from "gsap";
+import { CSSRulePlugin } from "gsap/CSSRulePlugin";
+
+gsap.registerPlugin(CSSRulePlugin)
 
 export const Mobile = ({completeText})=>{
 
@@ -46,13 +49,67 @@ export const Mobile = ({completeText})=>{
                 }, '<')
 
             timeline.fromTo(venomChibi.current.position, {
-                    y: -0.1
+                    y: 0
                 },
                 {
-                    y: 0.1
+                    y: 0.2
                 }, '<')
         }
     }, [isChibiLoaded])
+
+    useEffect(()=>{
+        const section1H1 = CSSRulePlugin.getRule('.Mobile .section1 h1:before')
+        const section2H1 = CSSRulePlugin.getRule('.Mobile .section2 h1:before')
+        const section3H1 = CSSRulePlugin.getRule('.Mobile .section3 h1:before')
+
+        gsap.fromTo(section1H1, {
+            cssRule:{
+                width:"0%"
+            }
+        },
+        {
+            scrollTrigger:{
+                trigger: ".section1",
+                start: "top center"
+            },
+            cssRule:{
+                width:"95%"
+            },
+            duration: 0.7
+        })
+
+        gsap.fromTo(section2H1, {
+                cssRule:{
+                    width:"0%"
+                }
+            },
+            {
+                scrollTrigger:{
+                    trigger: ".section2",
+                    start: "top center"
+                },
+                cssRule:{
+                    width:"95%"
+                },
+                duration: 0.7
+            })
+
+        gsap.fromTo(section3H1, {
+                cssRule:{
+                    width:"0%"
+                }
+            },
+            {
+                scrollTrigger:{
+                    trigger: ".section3",
+                    start: "top center"
+                },
+                cssRule:{
+                    width:"95%"
+                },
+                duration: 0.7
+            })
+    }, [])
 
     return(
         <div className="Mobile" style={{'backgroundColor':'#121212'}}>

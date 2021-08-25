@@ -12,13 +12,13 @@ const Chibi = ({SceneRef, setChibiLoaded})=>{
     })
 
     return(
-        <primitive ref={SceneRef} object={gltf.scene} position={[0,0,3]}/>
+        <primitive ref={SceneRef} object={gltf.scene} position={[0,0,2.8]}/>
     )
 }
 
 export const VenomChibi = ({SceneRef, setChibiLoaded})=>{
     return(
-        <Canvas id={"canvas"} >
+        <Canvas id={"canvas"} dpr={Math.min(window.devicePixelRatio, 2)}>
             <ambientLight intensity={0.4} />
             <pointLight color="white" intensity={0.8} position={[-5, 5, 5]} />
             <Suspense fallback={null}>
