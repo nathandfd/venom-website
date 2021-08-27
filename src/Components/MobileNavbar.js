@@ -3,10 +3,11 @@ import {Link} from "./Link";
 import {useRef} from "react";
 import {gsap} from "gsap";
 
-const menu = useRef()
 const html = document.getElementsByTagName('html')[0]
 
 export const MobileNavbar = ()=>{
+
+    const menu = useRef()
 
     const closeMenu = ()=>{
         html.style.overflow = "auto"

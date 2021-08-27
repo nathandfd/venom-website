@@ -13,6 +13,16 @@ gsap.registerPlugin(ScrollTrigger, CSSRulePlugin)
 
 const video = document.createElement('video')
 
+const timeline = gsap.timeline({
+    scrollTrigger:{
+        trigger:'.App',
+        pin: true,
+        start: "top top",
+        end: "+=6000",
+        scrub: true,
+    }
+})
+
 function Background(props) {
   const mesh = useRef()
 
@@ -148,7 +158,6 @@ function App({completeText}) {
 
     useEffect(()=>{
         if (parallaxObjLoaded){
-            console.log("suce")
             const h1Before = CSSRulePlugin.getRule('.App .floating-text h1:before')
             const h1BeforeAnimation = gsap.timeline({
                 paused:true,
@@ -157,15 +166,6 @@ function App({completeText}) {
             h1BeforeAnimation
                 .fromTo(h1Before,{cssRule:{width:'0%'}},{cssRule:{width:'95%'}, duration:.75, ease:"power4"})
 
-            const timeline = gsap.timeline({
-                scrollTrigger:{
-                    trigger:'.App',
-                    pin: true,
-                    start: "top top",
-                     end: "+=6000",
-                    scrub: true,
-                }
-            })
 
             timeline
                 .set(parallaxObjParent.current.position,{x:0})

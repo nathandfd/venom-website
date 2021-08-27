@@ -15,11 +15,6 @@ const section1H1 = CSSRulePlugin.getRule('.Mobile .section1 h1:before')
 const section2H1 = CSSRulePlugin.getRule('.Mobile .section2 h1:before')
 const section3H1 = CSSRulePlugin.getRule('.Mobile .section3 h1:before')
 
-const [menuVisibility, setVisibility] = useState(false)
-const [sectionText, setSectionText] = useState("presentation")
-const [isChibiLoaded, setChibiLoaded] = useState(false)
-const venomChibi = useRef()
-
 const timeline = gsap.timeline({
     scrollTrigger:{
         trigger:'.header',
@@ -29,12 +24,19 @@ const timeline = gsap.timeline({
     }
 })
 
-const setMenuVisibility = (sectionText)=>{
-    setSectionText(sectionText)
-    setVisibility(true)
-}
-
 export const Mobile = ({completeText})=>{
+
+    const [menuVisibility, setVisibility] = useState(false)
+    const [sectionText, setSectionText] = useState("presentation")
+    const [isChibiLoaded, setChibiLoaded] = useState(false)
+
+    const setMenuVisibility = (sectionText)=>{
+        setSectionText(sectionText)
+        setVisibility(true)
+    }
+
+    const venomChibi = useRef()
+
     useEffect(()=>{
         if (isChibiLoaded){
             timeline.fromTo(venomChibi.current.rotation, {
@@ -163,28 +165,6 @@ export const Mobile = ({completeText})=>{
                     </div>
                 </div>
             </div>
-            {/*<div className={"footer"}>*/}
-            {/*    © Copyright 2021 Venom. All rights reserved.*/}
-            {/*</div>*/}
-            {/*<div className={"canvas"}>*/}
-            {/*    <Canvas linear={true} dpr={Math.max(window.devicePixelRatio, 1)}>*/}
-            {/*        /!*<ambientLight color={"#fff"}/>*!/*/}
-            {/*        <Background position={[0,0,4.5]}/>*/}
-            {/*        <Suspense fallback={null}>*/}
-            {/*            <group ref={parallaxObjParent}>*/}
-            {/*                <VideoRect loaded={setParallaxObjLoaded} position={[0.3,-0.1,4]}/>*/}
-            {/*                <ImageRect imageLink={'/buisness.jpg'} loaded={()=>{}} rotation={[0,0,0.1]} position={[0.3,-0.1,3.9]}/>*/}
-            {/*                <ImageRect imageLink={'/office.jpg'} loaded={()=>{}} rotation={[0,0,-0.1]} position={[0.3,-0.1,3.9]}/>*/}
-            {/*            </group>*/}
-            {/*        </Suspense>*/}
-            {/*    </Canvas>*/}
-            {/*</div>*/}
-            {/*<div ref={cursor} id="cursor-point"></div>*/}
-            {/*<div ref={follower} id="cursor-follower">*/}
-            {/*    <div className="hexagon"></div>*/}
-            {/*    <div className="hexagon"></div>*/}
-            {/*    <div className="hexagon"></div>*/}
-            {/*</div>*/}
             <ReadingMenu text={completeText[sectionText]} visibility={menuVisibility} setVisibility={setVisibility}/>
         </div>
     )
