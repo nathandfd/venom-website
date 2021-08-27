@@ -11,27 +11,30 @@ import { CSSRulePlugin } from "gsap/CSSRulePlugin";
 
 gsap.registerPlugin(CSSRulePlugin)
 
-export const Mobile = ({completeText})=>{
+const section1H1 = CSSRulePlugin.getRule('.Mobile .section1 h1:before')
+const section2H1 = CSSRulePlugin.getRule('.Mobile .section2 h1:before')
+const section3H1 = CSSRulePlugin.getRule('.Mobile .section3 h1:before')
 
-    const [menuVisibility, setVisibility] = useState(false)
-    const [sectionText, setSectionText] = useState("presentation")
-    const [isChibiLoaded, setChibiLoaded] = useState(false)
-    const timeline = gsap.timeline({
-        scrollTrigger:{
-            trigger:'.header',
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-        }
-    })
+const [menuVisibility, setVisibility] = useState(false)
+const [sectionText, setSectionText] = useState("presentation")
+const [isChibiLoaded, setChibiLoaded] = useState(false)
+const venomChibi = useRef()
 
-    const setMenuVisibility = (sectionText)=>{
-        setSectionText(sectionText)
-        setVisibility(true)
+const timeline = gsap.timeline({
+    scrollTrigger:{
+        trigger:'.header',
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
     }
+})
 
-    const venomChibi = useRef()
+const setMenuVisibility = (sectionText)=>{
+    setSectionText(sectionText)
+    setVisibility(true)
+}
 
+export const Mobile = ({completeText})=>{
     useEffect(()=>{
         if (isChibiLoaded){
             timeline.fromTo(venomChibi.current.rotation, {
@@ -58,10 +61,6 @@ export const Mobile = ({completeText})=>{
     }, [isChibiLoaded])
 
     useEffect(()=>{
-        const section1H1 = CSSRulePlugin.getRule('.Mobile .section1 h1:before')
-        const section2H1 = CSSRulePlugin.getRule('.Mobile .section2 h1:before')
-        const section3H1 = CSSRulePlugin.getRule('.Mobile .section3 h1:before')
-
         gsap.fromTo(section1H1, {
             cssRule:{
                 width:"0%"

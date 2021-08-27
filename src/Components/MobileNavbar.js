@@ -3,12 +3,13 @@ import {Link} from "./Link";
 import {useRef} from "react";
 import {gsap} from "gsap";
 
+const menu = useRef()
+const html = document.getElementsByTagName('html')[0]
+
 export const MobileNavbar = ()=>{
 
-    const menu = useRef()
-
     const closeMenu = ()=>{
-        document.getElementsByTagName('html')[0].style.overflow = "auto"
+        html.style.overflow = "auto"
 
         gsap.to(menu.current, {
             xPercent: 0,
@@ -17,7 +18,7 @@ export const MobileNavbar = ()=>{
     }
 
     const openMenu = ()=>{
-        document.getElementsByTagName('html')[0].style.overflow = "hidden"
+        html.style.overflow = "hidden"
 
         gsap.to(menu.current, {
             xPercent: -100,
