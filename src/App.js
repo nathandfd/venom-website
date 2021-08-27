@@ -255,7 +255,7 @@ function App({completeText}) {
         {/*    © Copyright 2021 Venom. All rights reserved.*/}
         {/*</div>*/}
       <div className={"canvas"}>
-          <Canvas linear={true} dpr={Math.max(window.devicePixelRatio, 1)}>
+          <Canvas linear={true} dpr={Math.min(window.devicePixelRatio, 2)}>
               {/*<ambientLight color={"#fff"}/>*/}
               <Background position={[0,0,4.5]}/>
               <Suspense fallback={null}>

@@ -43,14 +43,14 @@ export const Mobile = ({completeText})=>{
                 y: -0.1
             },
             {
-                y: 0.1
+                y: 0.4
             })
 
             timeline.fromTo(venomChibi.current.rotation, {
                     x: 0.1
                 },
                 {
-                    x: -0.1
+                    x: -0.4
                 }, '<')
 
             timeline.fromTo(venomChibi.current.position, {
