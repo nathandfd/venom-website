@@ -26,6 +26,33 @@
     overflow-y: scroll;
 }
 
+/*.reading-menu h1{*/
+/*    border-bottom: darkred 2px solid;*/
+/*    width: max-content;*/
+/*    margin: 1rem auto;*/
+/*}*/
+
+.reading-menu h1{
+    position: relative;
+    width: max-content;
+    margin: 1rem auto;
+}
+
+.reading-menu h1:before{
+    content: '';
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    bottom: 0;
+    z-index: -1;
+    background-color: darkred;
+}
+
+.reading-menu h2{
+    border-bottom: 2px solid darkred;
+    width: max-content;
+}
+
 .reading-menu .close{
     fill: darkred;
     height: 2rem;
