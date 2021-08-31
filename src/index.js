@@ -4,6 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Mobile} from "./Mobile";
+import {
+    BrowserView,
+    MobileView,
+} from "react-device-detect";
 
 const completeText = {
     presentation:{
@@ -63,8 +67,12 @@ const completeText = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App completeText={completeText} />
-    {/*  <Mobile completeText={completeText} />*/}
+      <BrowserView>
+          <App completeText={completeText} />
+      </BrowserView>
+      <MobileView>
+          <Mobile completeText={completeText} />
+      </MobileView>
   </React.StrictMode>,
   document.getElementById('root')
 );
