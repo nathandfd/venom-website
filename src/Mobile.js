@@ -132,7 +132,7 @@ export const Mobile = ({completeText})=>{
                 </div>
                 <VenomChibi setChibiLoaded={setChibiLoaded} SceneRef={venomChibi} />
             </div>
-            <div className="section section1">
+            <div id={"presentation"} className="section section1">
                 <div className={"centering-div"}>
                     <div className="floating-text floating-left">
                         <h1 className={"sectionTitle"}>Présentation</h1>
@@ -142,7 +142,7 @@ export const Mobile = ({completeText})=>{
                     </div>
                 </div>
             </div>
-            <div className="section section2">
+            <div id={"partenaire"} className="section section2">
                 <div className="centering-div">
                     <div className="floating-text floating-right">
                         <h1 className={"sectionTitle"}>Partenaire</h1>
@@ -152,7 +152,7 @@ export const Mobile = ({completeText})=>{
                     </div>
                 </div>
             </div>
-            <div className="section section3">
+            <div id={"recrutement"} className="section section3">
                 <div className="centering-div">
                     <div className="floating-text floating-left">
                         <h1 className={"sectionTitle"}>Recrutement</h1>

@@ -6,22 +6,12 @@ import {Button} from "./Components/Button";
 import {TextureLoader} from "three";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CSSRulePlugin } from "gsap/CSSRulePlugin";
-import {Link} from "./Components/Link";
+import {NavLink} from "./Components/NavLink";
 import {ReadingMenu} from "./Components/ReadingMenu";
 
 gsap.registerPlugin(ScrollTrigger, CSSRulePlugin)
 
 const video = document.createElement('video')
-
-const timeline = gsap.timeline({
-    scrollTrigger:{
-        trigger:'.App',
-        pin: true,
-        start: "top top",
-        end: "+=6000",
-        scrub: true,
-    }
-})
 
 function Background(props) {
   const mesh = useRef()
@@ -51,7 +41,6 @@ const ImageRect = (props)=>{
     useEffect(()=>{
         setImageHeight(texture.image.naturalHeight)
         setImageWidth(texture.image.naturalWidth)
-        props.loaded(true)
     }, [texture])
 
     return(
@@ -86,55 +75,7 @@ const VideoRect = (props)=>{
     )
 }
 
-function App({completeText}) {
-    const cursor = useRef()
-    const follower = useRef()
-    const parallaxObjParent = useRef()
-    const [cursorHovering, setCursorHovering] = useState(false)
-    const [parallaxObjLoaded, setParallaxObjLoaded] = useState(false)
-    const [menuVisibility, setVisibility] = useState(false)
-    const [sectionText, setSectionText] = useState("presentation")
-
-
-    const setMenuVisibility = (sectionText)=>{
-        setSectionText(sectionText)
-        setVisibility(true)
-    }
-
-    useEffect(()=>{
-            document.addEventListener('mousemove', (e) => {
-                e.stopPropagation()
-                e.preventDefault()
-                gsap.set(cursor.current, {
-                    left: e.clientX,
-                    top: e.clientY,
-                })
-                gsap.to(follower.current, {
-                    left: e.clientX,
-                    top: e.clientY,
-                    duration: 1
-                })
-                if (parallaxObjParent.current.children){
-                    gsap.to(parallaxObjParent.current.children, {
-                        onUpdate: () => {
-                            let tempSortedArray = [...parallaxObjParent.current.children]
-                            for (let i = 0; i < tempSortedArray.length; i++){
-                                tempSortedArray[i].position.set(-(e.clientX * (0.02) / window.innerWidth) + 0.5, (e.clientY * (0.02) / window.innerHeight) - 0.1)
-                            }
-                        }
-                    })
-                }
-                gsap.to('.floating-text.floating-left', {
-                    left: -(e.clientX * 2 / window.innerWidth) + 10 + 'vw',
-                    top: -(e.clientY * 1 / window.innerHeight) + 10 + 'vh',
-                })
-                gsap.to('.floating-text.floating-right', {
-                    right: (e.clientX * 2 / window.innerWidth) + 5 + 'vw',
-                    bottom: (e.clientY * 1 / window.innerHeight) + 10 + 'vh',
-                })
-            }, {passive:true, capture:true})
-    },[])
-
+const Cursor = ({cursor, follower, cursorHovering})=>{
     useEffect(()=>{
         if (cursorHovering){
             gsap.to(follower.current.children,{
@@ -155,6 +96,97 @@ function App({completeText}) {
             })
         }
     }, [cursorHovering])
+
+    return(
+        <>
+            <div ref={cursor} id="cursor-point"></div>
+            <div ref={follower} id="cursor-follower">
+                <div className="hexagon"></div>
+                <div className="hexagon"></div>
+                <div className="hexagon"></div>
+            </div>
+        </>
+    )
+}
+
+// const WebGLComponent = ()=>{
+//     return(
+//         <>
+//             <div className={"canvas"}>
+//                 <Canvas linear={true} dpr={Math.min(window.devicePixelRatio, 2)}>
+//                     {/*<ambientLight color={"#fff"}/>*/}
+//                     <Background position={[0,0,4.5]}/>
+//                     <Suspense fallback={null}>
+//                         <group ref={parallaxObjParent}>
+//                             <VideoRect loaded={setParallaxObjLoaded} position={[0.3,-0.1,4]}/>
+//                             <ImageRect imageLink={'/buisness.jpg'} rotation={[0,0,0.1]} position={[0.3,-0.1,3.9]}/>
+//                             <ImageRect imageLink={'/office.jpg'} rotation={[0,0,-0.1]} position={[0.3,-0.1,3.9]}/>
+//                         </group>
+//                     </Suspense>
+//                 </Canvas>
+//             </div>
+//         </>
+//     )
+//
+// }
+
+function App({completeText}) {
+    const cursor = useRef()
+    const follower = useRef()
+    const parallaxObjParent = useRef()
+    const [cursorHovering, setCursorHovering] = useState(false)
+    const [parallaxObjLoaded, setParallaxObjLoaded] = useState(false)
+    const [menuVisibility, setVisibility] = useState(false)
+    const [sectionText, setSectionText] = useState("presentation")
+
+    const timeline = gsap.timeline({
+        scrollTrigger:{
+            trigger:'.App',
+            pin: true,
+            start: "top top",
+            end: "+=6000",
+            scrub: true,
+        }
+    })
+
+    const setMenuVisibility = (sectionText)=>{
+        setSectionText(sectionText)
+        setVisibility(true)
+    }
+
+    useEffect(()=>{
+            if (parallaxObjLoaded){
+                document.addEventListener('mousemove', (e) => {
+                    e.stopPropagation()
+                    e.preventDefault()
+                    gsap.set(cursor.current, {
+                        left: e.clientX,
+                        top: e.clientY,
+                    })
+                    gsap.to(follower.current, {
+                        left: e.clientX,
+                        top: e.clientY,
+                        duration: 1
+                    })
+                    gsap.to(parallaxObjParent.current.children, {
+                        onUpdate: () => {
+                            let tempSortedArray = [...parallaxObjParent.current.children]
+                            for (let i = 0; i < tempSortedArray.length; i++){
+                                tempSortedArray[i].position.set(-(e.clientX * (0.02) / window.innerWidth) + 0.5, (e.clientY * (0.02) / window.innerHeight) - 0.1)
+                            }
+                        }
+                    })
+                    gsap.to('.floating-text.floating-left', {
+                        left: -(e.clientX * 2 / window.innerWidth) + 10 + 'vw',
+                        top: -(e.clientY * 1 / window.innerHeight) + 10 + 'vh',
+                    })
+                    gsap.to('.floating-text.floating-right', {
+                        right: (e.clientX * 2 / window.innerWidth) + 5 + 'vw',
+                        bottom: (e.clientY * 1 / window.innerHeight) + 10 + 'vh',
+                    })
+                }, {passive:true, capture:true})
+            }
+    },[parallaxObjLoaded])
 
     useEffect(()=>{
         if (parallaxObjLoaded){
@@ -201,11 +233,11 @@ function App({completeText}) {
             <div className="navbar">
                 <div className="blurred-background"></div>
                 <ul>
-                    <li><Link text={"Présentation"} setHover={setCursorHovering}/></li>
-                    <li><Link text={"Partenaire"} setHover={setCursorHovering}/></li>
+                    <li><NavLink scrollToAnchor={1500} text={"Présentation"} setHover={setCursorHovering}/></li>
+                    <li><NavLink scrollToAnchor={3500} text={"Partenaire"} setHover={setCursorHovering}/></li>
                     <li><img src="/venom-logo.png" alt=""/></li>
-                    <li><Link text={"Recrutement"} setHover={setCursorHovering}/></li>
-                    <li><Link text={"Contact"} setHover={setCursorHovering}/></li>
+                    <li><NavLink scrollToAnchor={6000} text={"Recrutement"} setHover={setCursorHovering}/></li>
+                    <li><NavLink scrollToAnchor={6000} text={"Contact"} setHover={setCursorHovering}/></li>
                 </ul>
             </div>
             <div className={"scroll-down"}>
@@ -223,7 +255,7 @@ function App({completeText}) {
                 <div className="background2"></div>
             </div>
         </div>
-        <div className="section section1">
+        <div id={"presentation"} className="section section1">
             <div className={"centering-div"}>
                 <div className="floating-text floating-left">
                     <h1 className={"sectionTitle"}>Présentation</h1>
@@ -232,7 +264,7 @@ function App({completeText}) {
                 </div>
             </div>
         </div>
-        <div className="section section2">
+        <div id={"partenaire"} className="section section2">
             <div className="centering-div">
                 <div className="floating-text floating-right">
                     <h1 className={"sectionTitle"}>Partenaire</h1>
@@ -241,7 +273,7 @@ function App({completeText}) {
                 </div>
             </div>
         </div>
-        <div className="section section3">
+        <div id={"recrutement"} className="section section3">
             <div className="centering-div">
                 <div className="floating-text floating-left">
                     <h1 className={"sectionTitle"}>Recrutement</h1>
@@ -254,25 +286,19 @@ function App({completeText}) {
         {/*<div className={"footer"}>*/}
         {/*    © Copyright 2021 Venom. All rights reserved.*/}
         {/*</div>*/}
-      <div className={"canvas"}>
-          <Canvas linear={true} dpr={Math.min(window.devicePixelRatio, 2)}>
-              {/*<ambientLight color={"#fff"}/>*/}
-              <Background position={[0,0,4.5]}/>
-              <Suspense fallback={null}>
-                  <group ref={parallaxObjParent}>
-                      <VideoRect loaded={setParallaxObjLoaded} position={[0.3,-0.1,4]}/>
-                      <ImageRect imageLink={'/buisness.jpg'} loaded={()=>{}} rotation={[0,0,0.1]} position={[0.3,-0.1,3.9]}/>
-                      <ImageRect imageLink={'/office.jpg'} loaded={()=>{}} rotation={[0,0,-0.1]} position={[0.3,-0.1,3.9]}/>
-                  </group>
-              </Suspense>
-          </Canvas>
-      </div>
-        <div ref={cursor} id="cursor-point"></div>
-        <div ref={follower} id="cursor-follower">
-            <div className="hexagon"></div>
-            <div className="hexagon"></div>
-            <div className="hexagon"></div>
-        </div>
+        <div className={"canvas"}>
+            <Canvas linear={true} dpr={Math.min(window.devicePixelRatio, 2)}>
+                {/*<ambientLight color={"#fff"}/>*/}
+                <Background position={[0,0,4.5]}/>
+                <Suspense fallback={null}>
+                    <group ref={parallaxObjParent}>
+                        <VideoRect loaded={setParallaxObjLoaded} position={[0.3,-0.1,4]}/>
+                        <ImageRect imageLink={'/buisness.jpg'} rotation={[0,0,0.1]} position={[0.3,-0.1,3.9]}/>
+                        <ImageRect imageLink={'/office.jpg'} rotation={[0,0,-0.1]} position={[0.3,-0.1,3.9]}/>
+                    </group>
+                </Suspense>
+            </Canvas>
+        </div>        <Cursor cursor={cursor} follower={follower} cursorHovering={cursorHovering}/>
         <ReadingMenu text={completeText[sectionText]} visibility={menuVisibility} setVisibility={setVisibility} onHover={setCursorHovering}/>
     </div>
   );

@@ -1,5 +1,5 @@
 import './MobileNavbar.scss'
-import {Link} from "./Link";
+import {NavLink} from "./NavLink";
 import {useRef} from "react";
 import {gsap} from "gsap";
 
@@ -46,10 +46,10 @@ export const MobileNavbar = ()=>{
                 </div>
                 <img src="/venom-logo.png" alt=""/>
                 <ul>
-                    <li><Link text={"Présentation"} /></li>
-                    <li><Link text={"Partenaire"} /></li>
-                    <li><Link text={"Recrutement"} /></li>
-                    <li><Link text={"Contact"} /></li>
+                    <li><NavLink closeFunction={closeMenu} scrollToAnchor={"#presentation"} text={"Présentation"} /></li>
+                    <li><NavLink closeFunction={closeMenu} scrollToAnchor={"#partenaire"} text={"Partenaire"} /></li>
+                    <li><NavLink closeFunction={closeMenu} scrollToAnchor={"#recrutement"} text={"Recrutement"} /></li>
+                    <li><NavLink closeFunction={closeMenu} scrollToAnchor={"#recrutement"} text={"Contact"} /></li>
                 </ul>
             </div>
         </div>
