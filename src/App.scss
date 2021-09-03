@@ -219,16 +219,27 @@
 
   /*Cursor*/
 
+  .cursor-container{
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+
+  }
+
   #cursor-follower{
     width: 32px;
     height: 18px;
     z-index: 1000;
     pointer-events: none;
-    position: fixed;
+    position: absolute;
     transition: width .3s;
     transform-origin: center center;
     animation: spin infinite 10s forwards linear;
     box-sizing: content-box;
+    top: 0;
+    left: 0;
   }
 
   #cursor.hovering{
@@ -253,7 +264,7 @@
   }
 
   #cursor-point{
-    position: fixed;
+    position: absolute;
     width: 10px;
     height: 10px;
     background-color: var(--cursor-color);
@@ -261,6 +272,8 @@
     transform: translate3d(-50%, -50%, 0);
     z-index: 1000;
     pointer-events: none;
+    top: 0;
+    left: 0;
   }
 
   @keyframes spin {

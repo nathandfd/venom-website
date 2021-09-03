@@ -13,6 +13,11 @@ gsap.registerPlugin(ScrollTrigger, CSSRulePlugin)
 
 const video = document.createElement('video')
 
+function isHidden(el) {
+    const style = window.getComputedStyle(el);
+    return ((style.display === 'none') || (style.visibility === 'hidden'))
+}
+
 function Background(props) {
   const mesh = useRef()
 
@@ -98,14 +103,14 @@ const Cursor = ({cursor, follower, cursorHovering})=>{
     }, [cursorHovering])
 
     return(
-        <>
+        <div className={"cursor-container"}>
             <div ref={cursor} id="cursor-point"></div>
             <div ref={follower} id="cursor-follower">
                 <div className="hexagon"></div>
                 <div className="hexagon"></div>
                 <div className="hexagon"></div>
             </div>
-        </>
+        </div>
     )
 }
 
@@ -155,37 +160,61 @@ function App({completeText}) {
     }
 
     useEffect(()=>{
-            if (parallaxObjLoaded){
-                document.addEventListener('mousemove', (e) => {
-                    e.stopPropagation()
-                    e.preventDefault()
-                    gsap.set(cursor.current, {
-                        left: e.clientX,
-                        top: e.clientY,
-                    })
-                    gsap.to(follower.current, {
-                        left: e.clientX,
-                        top: e.clientY,
-                        duration: 1
-                    })
-                    gsap.to(parallaxObjParent.current.children, {
-                        onUpdate: () => {
-                            let tempSortedArray = [...parallaxObjParent.current.children]
-                            for (let i = 0; i < tempSortedArray.length; i++){
-                                tempSortedArray[i].position.set(-(e.clientX * (0.02) / window.innerWidth) + 0.5, (e.clientY * (0.02) / window.innerHeight) - 0.1)
-                            }
-                        }
-                    })
-                    gsap.to('.floating-text.floating-left', {
-                        left: -(e.clientX * 2 / window.innerWidth) + 10 + 'vw',
-                        top: -(e.clientY * 1 / window.innerHeight) + 10 + 'vh',
-                    })
-                    gsap.to('.floating-text.floating-right', {
-                        right: (e.clientX * 2 / window.innerWidth) + 5 + 'vw',
-                        bottom: (e.clientY * 1 / window.innerHeight) + 10 + 'vh',
-                    })
-                }, {passive:true, capture:true})
+        const floatingTextList = document.querySelectorAll(".floating-text")
+        const cursorContainer = document.querySelector(".cursor-container")
+
+        const mousemoveHandler = (e) => {
+            e.stopPropagation()
+            cursorContainer.style.transform = `translate3d(${e.clientX}px,${e.clientY}px,0)`
+            gsap.to(parallaxObjParent.current.children, {
+                onUpdate: () => {
+                    let tempSortedArray = [...parallaxObjParent.current.children]
+                    for (let i = 0; i < tempSortedArray.length; i++) {
+                        tempSortedArray[i].position.set(-(e.clientX * (0.02) / window.innerWidth) + 0.5, (e.clientY * (0.02) / window.innerHeight) - 0.1)
+                    }
+                }
+            })
+
+            for (let i = 0; i<3; i++){
+                if (!isHidden(floatingTextList[i])){
+                    if (floatingTextList[i].classList.contains("floating-left")){
+                        gsap.to(floatingTextList[i], {
+                            left: -(e.clientX * 2 / window.innerWidth) + 10 + 'vw',
+                            top: -(e.clientY * 1 / window.innerHeight) + 10 + 'vh',
+                        })
+                    }
+                    else{
+                        gsap.to(floatingTextList[i], {
+                            right: (e.clientX * 2 / window.innerWidth) + 5 + 'vw',
+                            bottom: (e.clientY * 1 / window.innerHeight) + 10 + 'vh',
+                        })
+                    }
+                }
             }
+        }
+
+        for (let i = 0; i<3; i++){
+            if (floatingTextList[i].classList.contains("floating-left")){
+                gsap.to(floatingTextList[i], {
+                    left: -(window.innerWidth  / window.innerWidth) + 10 + 'vw',
+                    top: -(window.innerHeight/2 / window.innerHeight) + 10 + 'vh',
+                })
+            }
+            else{
+                gsap.to(floatingTextList[i], {
+                    right: (window.innerWidth / window.innerWidth) + 5 + 'vw',
+                    bottom: (window.innerHeight/2 / window.innerHeight) + 10 + 'vh',
+                })
+            }
+        }
+
+        if (parallaxObjLoaded) {
+            document.addEventListener('mousemove', mousemoveHandler, {passive: true, capture: true})
+        }
+
+        return () => {
+            document.removeEventListener("mousemove", mousemoveHandler)
+        }
     },[parallaxObjLoaded])
 
     useEffect(()=>{
@@ -287,7 +316,7 @@ function App({completeText}) {
         {/*    © Copyright 2021 Venom. All rights reserved.*/}
         {/*</div>*/}
         <div className={"canvas"}>
-            <Canvas linear={true} dpr={Math.min(window.devicePixelRatio, 2)}>
+            <Canvas linear={true} dpr={1}>
                 {/*<ambientLight color={"#fff"}/>*/}
                 <Background position={[0,0,4.5]}/>
                 <Suspense fallback={null}>
@@ -298,7 +327,8 @@ function App({completeText}) {
                     </group>
                 </Suspense>
             </Canvas>
-        </div>        <Cursor cursor={cursor} follower={follower} cursorHovering={cursorHovering}/>
+        </div>
+        <Cursor cursor={cursor} follower={follower} cursorHovering={cursorHovering}/>
         <ReadingMenu text={completeText[sectionText]} visibility={menuVisibility} setVisibility={setVisibility} onHover={setCursorHovering}/>
     </div>
   );
