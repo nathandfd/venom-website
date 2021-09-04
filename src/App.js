@@ -80,66 +80,8 @@ const VideoRect = (props)=>{
     )
 }
 
-const Cursor = ({cursor, follower, cursorHovering})=>{
-    useEffect(()=>{
-        if (cursorHovering){
-            gsap.to(follower.current.children,{
-                paddingRight: 14,
-                paddingLeft: 14,
-                marginLeft:-10,
-                duration: .5,
-                width:50
-            })
-        }
-        else {
-            gsap.to(follower.current.children,{
-                paddingRight: 0,
-                paddingLeft: 0,
-                marginLeft:0,
-                duration: .5,
-                width:32
-            })
-        }
-    }, [cursorHovering])
-
-    return(
-        <div className={"cursor-container"}>
-            <div ref={cursor} id="cursor-point"></div>
-            <div ref={follower} id="cursor-follower">
-                <div className="hexagon"></div>
-                <div className="hexagon"></div>
-                <div className="hexagon"></div>
-            </div>
-        </div>
-    )
-}
-
-// const WebGLComponent = ()=>{
-//     return(
-//         <>
-//             <div className={"canvas"}>
-//                 <Canvas linear={true} dpr={Math.min(window.devicePixelRatio, 2)}>
-//                     {/*<ambientLight color={"#fff"}/>*/}
-//                     <Background position={[0,0,4.5]}/>
-//                     <Suspense fallback={null}>
-//                         <group ref={parallaxObjParent}>
-//                             <VideoRect loaded={setParallaxObjLoaded} position={[0.3,-0.1,4]}/>
-//                             <ImageRect imageLink={'/buisness.jpg'} rotation={[0,0,0.1]} position={[0.3,-0.1,3.9]}/>
-//                             <ImageRect imageLink={'/office.jpg'} rotation={[0,0,-0.1]} position={[0.3,-0.1,3.9]}/>
-//                         </group>
-//                     </Suspense>
-//                 </Canvas>
-//             </div>
-//         </>
-//     )
-//
-// }
-
-function App({completeText}) {
-    const cursor = useRef()
-    const follower = useRef()
+function App({completeText, cursorRef}) {
     const parallaxObjParent = useRef()
-    const [cursorHovering, setCursorHovering] = useState(false)
     const [parallaxObjLoaded, setParallaxObjLoaded] = useState(false)
     const [menuVisibility, setVisibility] = useState(false)
     const [sectionText, setSectionText] = useState("presentation")
@@ -159,13 +101,29 @@ function App({completeText}) {
         setVisibility(true)
     }
 
+    const handleMouseEnter = ()=>{
+        gsap.to(cursorRef.current.children,{
+            paddingRight: 14,
+            paddingLeft: 14,
+            marginLeft:-10,
+            duration: .5,
+            width:50
+        })
+    }
+    const handleMouseLeave = ()=>{
+        gsap.to(cursorRef.current.children,{
+            paddingRight: 0,
+            paddingLeft: 0,
+            marginLeft:0,
+            duration: .5,
+            width:32
+        })
+    }
+
     useEffect(()=>{
         const floatingTextList = document.querySelectorAll(".floating-text")
-        const cursorContainer = document.querySelector(".cursor-container")
 
         const mousemoveHandler = (e) => {
-            e.stopPropagation()
-            cursorContainer.style.transform = `translate3d(${e.clientX}px,${e.clientY}px,0)`
             gsap.to(parallaxObjParent.current.children, {
                 onUpdate: () => {
                     let tempSortedArray = [...parallaxObjParent.current.children]
@@ -262,11 +220,11 @@ function App({completeText}) {
             <div className="navbar">
                 <div className="blurred-background"></div>
                 <ul>
-                    <li><NavLink scrollToAnchor={1500} text={"Présentation"} setHover={setCursorHovering}/></li>
-                    <li><NavLink scrollToAnchor={3500} text={"Partenaire"} setHover={setCursorHovering}/></li>
+                    <li><NavLink scrollToAnchor={1500} text={"Présentation"} cursorRef={cursorRef}/></li>
+                    <li><NavLink scrollToAnchor={3500} text={"Partenaire"} cursorRef={cursorRef}/></li>
                     <li><img src="/venom-logo.png" alt=""/></li>
-                    <li><NavLink scrollToAnchor={6000} text={"Recrutement"} setHover={setCursorHovering}/></li>
-                    <li><NavLink scrollToAnchor={6000} text={"Contact"} setHover={setCursorHovering}/></li>
+                    <li><NavLink scrollToAnchor={6000} text={"Recrutement"} cursorRef={cursorRef}/></li>
+                    <li><NavLink scrollToAnchor={6000} text={"Contact"} cursorRef={cursorRef}/></li>
                 </ul>
             </div>
             <div className={"scroll-down"}>
@@ -289,7 +247,7 @@ function App({completeText}) {
                 <div className="floating-text floating-left">
                     <h1 className={"sectionTitle"}>Présentation</h1>
                     <p>VENOM est un réseau de distribution commercial qui est présent sur des marchés porteurs tels que la fourniture d’énergie, l’assurance ou encore la presse. Nous proposons par l’intermédiaire de nos forces de vente les offres les plus compétitives du marché actuel.</p>
-                    <Button text={"Découvrir"} setHover={setCursorHovering} onClick={()=>{setMenuVisibility('presentation')}} />
+                    <Button text={"Découvrir"} cursorRef={cursorRef} onClick={()=>{setMenuVisibility('presentation')}} />
                 </div>
             </div>
         </div>
@@ -298,7 +256,7 @@ function App({completeText}) {
                 <div className="floating-text floating-right">
                     <h1 className={"sectionTitle"}>Partenaire</h1>
                     <p>VENOM est partenaire d’ENGIE, fournisseur historique de gaz. Notre seule volonté est de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. C’est pourquoi nous mobilisons nos forces de vente afin de promouvoir les offres d’ENGIE.</p>
-                    <Button text={"En savoir plus"} setHover={setCursorHovering} onClick={()=>{setMenuVisibility('partenaire')}} />
+                    <Button text={"En savoir plus"} cursorRef={cursorRef} onClick={()=>{setMenuVisibility('partenaire')}} />
                 </div>
             </div>
         </div>
@@ -307,16 +265,17 @@ function App({completeText}) {
                 <div className="floating-text floating-left">
                     <h1 className={"sectionTitle"}>Recrutement</h1>
                     <p>Venom recrute à travers toute la France pour mener à bien ses objectifs. Conseillers Commerciaux, Managers Commerciaux ou encore Directeurs d’agences, nous recherchons nos futurs collaborateurs.Vous pensez avoir l’âme d’un super-héros de la vente ? Lancez-vous et rejoignez l’un de nos services : commercial ou back-office.</p>
-                    <Button text={"En savoir plus"} setHover={setCursorHovering} onClick={()=>{setMenuVisibility('recrutement')}} />
-                    <Button text={"Nous rejoindre"} setHover={setCursorHovering} onClick={()=>{setMenuVisibility('contact')}} />
+                    <Button text={"En savoir plus"} cursorRef={cursorRef} onClick={()=>{setMenuVisibility('recrutement')}} />
+                    <Button text={"Nous rejoindre"} cursorRef={cursorRef} onClick={()=>{setMenuVisibility('contact')}} />
                 </div>
             </div>
         </div>
-        {/*<div className={"footer"}>*/}
-        {/*    © Copyright 2021 Venom. All rights reserved.*/}
-        {/*</div>*/}
+        <div className={"footer"}>
+            <p>© Copyright 2021 Venom. All rights reserved.</p>
+            <p onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={()=>{setMenuVisibility('legalNotices')}}>Mentions légales</p>
+        </div>
         <div className={"canvas"}>
-            <Canvas linear={true} dpr={1}>
+            <Canvas linear={true} dpr={Math.min(window.devicePixelRatio, 1)}>
                 {/*<ambientLight color={"#fff"}/>*/}
                 <Background position={[0,0,4.5]}/>
                 <Suspense fallback={null}>
@@ -328,8 +287,7 @@ function App({completeText}) {
                 </Suspense>
             </Canvas>
         </div>
-        <Cursor cursor={cursor} follower={follower} cursorHovering={cursorHovering}/>
-        <ReadingMenu text={completeText[sectionText]} visibility={menuVisibility} setVisibility={setVisibility} onHover={setCursorHovering}/>
+        <ReadingMenu text={completeText[sectionText]} visibility={menuVisibility} setVisibility={setVisibility} cursorRef={cursorRef}/>
     </div>
   );
 }

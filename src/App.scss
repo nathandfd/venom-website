@@ -2,12 +2,12 @@
   --cursor-color: #b800ff;
 }
 
-.App{
-  *{
+.App {
+  * {
     cursor: none;
   }
 
-  .footer{
+  .footer {
     color: white;
     display: flex;
     align-items: center;
@@ -15,7 +15,7 @@
     height: 3rem;
   }
 
-  .section{
+  .section {
     height: 100vh;
     width: 100%;
     position: absolute;
@@ -26,7 +26,7 @@
     overflow-x: hidden;
   }
 
-  .centering-div{
+  .centering-div {
     max-width: 1800px;
     width: 100%;
     margin: 0 auto;
@@ -34,12 +34,12 @@
     position: relative;
   }
 
-  .floating-right{
+  .floating-right {
     left: unset !important;
     top: unset !important;
   }
 
-  .canvas{
+  .canvas {
     height: 100vh;
     width: 100%;
     position: fixed;
@@ -48,7 +48,7 @@
     z-index: 1;
   }
 
-  .floating-text{
+  .floating-text {
     position: absolute;
     color: white;
     left: 5rem;
@@ -57,7 +57,7 @@
     text-shadow: 1px 1px 5px black;;
   }
 
-  .floating-text h1{
+  .floating-text h1 {
     font-size: 5em;
     margin: 0;
     position: relative;
@@ -65,7 +65,7 @@
     text-shadow: none;
   }
 
-  .floating-text h1:before{
+  .floating-text h1:before {
     content: '';
     position: absolute;
     top: 50%;
@@ -76,12 +76,12 @@
     z-index: -1;
   }
 
-  .floating-text p{
+  .floating-text p {
     width: 33rem;
     font-size: 1.8em;
   }
 
-  .header{
+  .header {
     position: relative;
     z-index: 250;
     height: 100vh;
@@ -89,7 +89,7 @@
     pointer-events: auto;
   }
 
-  .header h1{
+  .header h1 {
     margin: 0;
     padding: 0;
     color: white;
@@ -99,12 +99,12 @@
 
   }
 
-  .header .background{
+  .header .background {
     height: 100%;
     width: 100%;
   }
 
-  .header .background1, .header .background2{
+  .header .background1, .header .background2 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -114,28 +114,26 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background:
-            linear-gradient(111.34deg, rgba(27, 23, 23, 0.95) 48.44%, rgba(129, 0, 0, 0.8) 81.77%),
-            url("Assets/img/office.jpg")
-            no-repeat;
+    background: linear-gradient(111.34deg, rgba(27, 23, 23, 0.95) 48.44%, rgba(129, 0, 0, 0.8) 81.77%),
+    url("Assets/img/office.jpg") no-repeat;
     background-size: cover;
     clip-path: polygon(58% 0, 0 0, 0 100%, 39% 100%);
   }
 
 
-  .header .background2{
+  .header .background2 {
     clip-path: polygon(58% 0, 100% 0, 100% 100%, 39% 100%);
   }
 
-  .header .navbar{
+  .header .navbar {
     position: absolute;
     z-index: 250;
     width: 100%;
-    border-bottom: 1px rgba(255,255,255, 0.2) solid;
+    border-bottom: 1px rgba(255, 255, 255, 0.2) solid;
     backdrop-filter: blur(10px);
   }
 
-  .header ul{
+  .header ul {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -146,19 +144,19 @@
     padding: 0;
   }
 
-  .header ul li{
+  .header ul li {
     color: white;
     list-style: none;
     font-size: 1.2em;
     text-align: center;
   }
 
-  .header img{
+  .header img {
     max-width: 10rem;
     height: auto;
   }
 
-  .scroll-down{
+  .scroll-down {
     z-index: 250;
     position: absolute;
     bottom: 1.5rem;
@@ -172,11 +170,11 @@
     font-size: 0.8em;
   }
 
-  .chevron{
+  .chevron {
     animation: float 3s alternate infinite ease-in-out;
   }
 
-  .chevron .vector{
+  .chevron .vector {
     width: 0.8rem;
     height: 0.8rem;
     display: block;
@@ -187,7 +185,7 @@
 
   /* Form */
 
-  form{
+  form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -197,7 +195,7 @@
 
   }
 
-  form input{
+  form input {
     margin-bottom: 2rem;
     margin-right: 2rem;
     border: 1px darkred solid;
@@ -208,7 +206,7 @@
     color: white;
   }
 
-  form.row{
+  form.row {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -216,82 +214,4 @@
   }
 
   /**/
-
-  /*Cursor*/
-
-  .cursor-container{
-    top: 0;
-    left: 0;
-    position: fixed;
-    z-index: 1000;
-    pointer-events: none;
-
-  }
-
-  #cursor-follower{
-    width: 32px;
-    height: 18px;
-    z-index: 1000;
-    pointer-events: none;
-    position: absolute;
-    transition: width .3s;
-    transform-origin: center center;
-    animation: spin infinite 10s forwards linear;
-    box-sizing: content-box;
-    top: 0;
-    left: 0;
-  }
-
-  #cursor.hovering{
-    width: 40px;
-  }
-
-  #cursor-follower .hexagon{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-left: 2px solid var(--cursor-color);
-    border-right: 2px solid var(--cursor-color);
-    transform-origin: center center;
-  }
-
-  #cursor-follower .hexagon:nth-child(1){
-    transform: rotateZ(120deg);
-  }
-
-  #cursor-follower .hexagon:nth-child(2){
-    transform: rotateZ(240deg);
-  }
-
-  #cursor-point{
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: var(--cursor-color);
-    border-radius: 100%;
-    transform: translate3d(-50%, -50%, 0);
-    z-index: 1000;
-    pointer-events: none;
-    top: 0;
-    left: 0;
-  }
-
-  @keyframes spin {
-    0%{
-      transform: translate3d(-50%, -50%, 0) rotateZ(0deg);
-    }
-
-    100%{
-      transform: translate3d(-50%, -50%, 0) rotateZ(360deg);
-    }
-  }
-
-  @keyframes float {
-    from{
-      transform: translateY(-50%);
-    }
-    to{
-      transform: translateY(50%);
-    }
-  }
 }

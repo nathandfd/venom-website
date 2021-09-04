@@ -1,28 +1,48 @@
 import './Button.scss'
+import {gsap} from "gsap";
 
-export const Button = (props)=>{
+export const Button = ({onClick, text, cursorRef})=>{
+    const handleMouseEnter = ()=>{
+        gsap.to(cursorRef.current.children,{
+            paddingRight: 14,
+            paddingLeft: 14,
+            marginLeft:-10,
+            duration: .5,
+            width:50
+        })
+    }
+    const handleMouseLeave = ()=>{
+        gsap.to(cursorRef.current.children,{
+            paddingRight: 0,
+            paddingLeft: 0,
+            marginLeft:0,
+            duration: .5,
+            width:32
+        })
+    }
+
     return(
         <>
             <button
                 className={"desktopButton"}
-                onMouseEnter={()=>{props.setHover(true)}}
-                onMouseLeave={()=>{props.setHover(false)}}
-                onClick={()=>{props.onClick(true)}}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onClick={()=>{onClick(true)}}
             >
-                {props.text}
+                {text}
             </button>
         </>
     )
 }
 
-export const MobileButton = (props)=>{
+export const MobileButton = ({onClick, text})=>{
     return(
         <>
             <button
                 className={"mobileButton"}
-                onClick={()=>{props.onClick(true)}}
+                onClick={()=>{onClick(true)}}
             >
-                {props.text}
+                {text}
             </button>
         </>
     )

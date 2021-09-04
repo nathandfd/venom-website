@@ -4,28 +4,47 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 gsap.registerPlugin(ScrollToPlugin);
 
-export const NavLink = (props)=>{
+export const NavLink = ({cursorRef, text, scrollToAnchor, closeFunction})=>{
 
-    const desktopOnClick = ()=>{gsap.to(window, {duration: 1, scrollTo:props.scrollToAnchor})}
+    const desktopOnClick = ()=>{gsap.to(window, {duration: 1, scrollTo:scrollToAnchor})}
     // const desktopOnClick = ()=>{}
-    const mobileOnClick = ()=>{props.closeFunction(); gsap.to(window, {duration: 1, scrollTo:props.scrollToAnchor})}
+    const mobileOnClick = ()=>{closeFunction(); gsap.to(window, {duration: 1, scrollTo:scrollToAnchor})}
+
+    const handleMouseEnter = ()=>{
+        gsap.to(cursorRef.current.children,{
+            paddingRight: 14,
+            paddingLeft: 14,
+            marginLeft:-10,
+            duration: .5,
+            width:50
+        })
+    }
+    const handleMouseLeave = ()=>{
+        gsap.to(cursorRef.current.children,{
+            paddingRight: 0,
+            paddingLeft: 0,
+            marginLeft:0,
+            duration: .5,
+            width:32
+        })
+    }
 
     return(
         <>
             {
-                props.setHover?
+                cursorRef.current?
                     <a
-                        onMouseEnter={()=>{props.setHover(true)}}
-                        onMouseLeave={()=>{props.setHover(false)}}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
                         onClick={desktopOnClick}
                     >
-                        {props.text}
+                        {text}
                     </a>
                     :
                     <a
                         onClick={mobileOnClick}
                     >
-                        {props.text}
+                        {text}
                     </a>
             }
         </>

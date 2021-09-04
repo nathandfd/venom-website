@@ -1,6 +1,6 @@
 import './VenomChibi.scss'
-import {Canvas, useFrame, useLoader} from "@react-three/fiber";
-import {useEffect, Suspense, useRef} from "react";
+import {Canvas, useLoader} from "@react-three/fiber";
+import {useEffect, Suspense} from "react";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import venomChibi from '../Assets/venom-chibi.glb'
 
@@ -18,7 +18,7 @@ const Chibi = ({SceneRef, setChibiLoaded})=>{
 
 export const VenomChibi = ({SceneRef, setChibiLoaded})=>{
     return(
-        <Canvas id={"canvas"} dpr={Math.min(window.devicePixelRatio, 2)}>
+        <Canvas id={"canvas"} dpr={Math.min(window.devicePixelRatio, 1)}>
             <ambientLight intensity={0.4} />
             <pointLight color="white" intensity={0.8} position={[-5, 5, 5]} />
             <Suspense fallback={null}>

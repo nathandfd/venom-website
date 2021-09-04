@@ -8,6 +8,9 @@ import {
     BrowserView,
     MobileView,
 } from "react-device-detect";
+import {Cursor} from "./Components/Cursor";
+
+const cursorRef = React.createRef()
 
 const completeText = {
     presentation:{
@@ -62,13 +65,21 @@ const completeText = {
                     <input type="submit" value={"Envoyer"}/>
                 </form>
             </>
+    },
+    legalNotices:{
+        title:"Mentions légales",
+        text:
+            <>
+                <p>Salut ici les mentions légales</p>
+            </>
     }
 }
 
 ReactDOM.render(
   <React.StrictMode>
       <BrowserView>
-          <App completeText={completeText} />
+          <Cursor cursorRef={cursorRef}/>
+          <App cursorRef={cursorRef} completeText={completeText} />
       </BrowserView>
       <MobileView>
           <Mobile completeText={completeText} />

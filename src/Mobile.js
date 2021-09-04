@@ -4,7 +4,6 @@ import {MobileButton} from "./Components/Button";
 import {ReadingMenu} from "./Components/ReadingMenu";
 import {useEffect, useRef, useState} from "react";
 import {MobileNavbar} from "./Components/MobileNavbar";
-import {Canvas} from "@react-three/fiber";
 import {VenomChibi} from "./Components/VenomChibi";
 import {gsap} from "gsap";
 import { CSSRulePlugin } from "gsap/CSSRulePlugin";
@@ -164,6 +163,10 @@ export const Mobile = ({completeText})=>{
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className={"footer"}>
+                <p>© Copyright 2021 Venom. All rights reserved.</p>
+                <p onClick={()=>{setMenuVisibility('legalNotices')}}>Mentions légales</p>
             </div>
             <ReadingMenu text={completeText[sectionText]} visibility={menuVisibility} setVisibility={setVisibility}/>
         </div>
