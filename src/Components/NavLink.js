@@ -7,7 +7,6 @@ gsap.registerPlugin(ScrollToPlugin);
 export const NavLink = ({cursorRef, text, scrollToAnchor, closeFunction})=>{
 
     const desktopOnClick = ()=>{gsap.to(window, {duration: 1, scrollTo:scrollToAnchor})}
-    // const desktopOnClick = ()=>{}
     const mobileOnClick = ()=>{closeFunction(); gsap.to(window, {duration: 1, scrollTo:scrollToAnchor})}
 
     const handleMouseEnter = ()=>{
@@ -32,7 +31,7 @@ export const NavLink = ({cursorRef, text, scrollToAnchor, closeFunction})=>{
     return(
         <>
             {
-                cursorRef.current?
+                cursorRef?
                     <a
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}

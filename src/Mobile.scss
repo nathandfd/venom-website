@@ -119,4 +119,13 @@
     align-items: center;
     justify-content: space-evenly;
   }
+
+  .footer {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+    font-size: .8em;
+  }
 }
