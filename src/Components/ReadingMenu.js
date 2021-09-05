@@ -1,4 +1,4 @@
-import './ReadingMenu.css'
+import './ReadingMenu.scss'
 import {useEffect} from "react";
 import {gsap} from 'gsap'
 

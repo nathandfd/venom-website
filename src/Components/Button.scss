@@ -10,13 +10,10 @@ button{
     margin: auto 1rem;
 }
 
-button:hover{
-    padding: 0.8rem 1rem;
-}
-
 .desktopButton{
     button:hover{
         cursor: none;
+        padding: 0.8rem 1rem;
     }
 }
 
