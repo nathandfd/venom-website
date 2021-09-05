@@ -58,8 +58,6 @@ const ImageRect = (props)=>{
 }
 
 const VideoRect = (props)=>{
-    const videoTexture = useRef()
-
     const imageWidth = 1280
     const imageHeight = 720
     const rectWidth = 1.6
@@ -75,7 +73,7 @@ const VideoRect = (props)=>{
         <mesh ref={props.reference} {...props}>
             <planeBufferGeometry args={[rectWidth,rectWidth*(imageHeight/imageWidth)]}/>
             <meshBasicMaterial attach={"material"}>
-                <videoTexture ref={videoTexture} attach={"map"} args={[video]} />
+                <videoTexture attach={"map"} args={[video]} />
             </meshBasicMaterial>
         </mesh>
     )
@@ -195,14 +193,14 @@ function App({completeText, cursorRef}) {
                 .fromTo('.header .navbar',{yPercent:0},{yPercent:-100, duration:1, ease:"none"},'<')
                 .fromTo('.header .scroll-down',{yPercent:0},{yPercent:120, duration:1, ease:"none"},'<')
                 .set('.section1',{visibility:'visible'},'<')
-                .fromTo('.section1',{opacity:0},{opacity:1,duration:1, onComplete:()=>{h1BeforeAnimation.resume(); video.fastSeek(0); video.play()}},'<0.3')
+                .fromTo('.section1',{opacity:0},{opacity:1,duration:1, onComplete:()=>{h1BeforeAnimation.resume(); video.currentTime = 0; video.play()}},'<0.3')
                 .fromTo('.header', {pointerEvents:'auto'},{pointerEvents:'none', duration:0},'<')
                 .set('.header',{visibility:'hidden'})
                 .to('.section1',{opacity:0, duration:1, delay:1})
                 .set('.section1',{visibility:'hidden'})
                 .to(parallaxObjParent.current.position,{x:-1, duration:1})
                 .to(parallaxObjParent.current.children[1].position,{z:'+=0.1', duration:1},'<')
-                .to(parallaxObjParent.current.children[0].position,{z:'-=0.1', duration:1, onReverseComplete:()=>{video.play()}, onComplete:()=>{video.fastSeek(0);video.pause()}},'<')
+                .to(parallaxObjParent.current.children[0].position,{z:'-=0.1', duration:1, onReverseComplete:()=>{video.play()}, onComplete:()=>{video.currentTime = 0;video.pause()}},'<')
                 .set('.section2',{visibility:'visible'})
                 .fromTo('.section2',{opacity:0},{opacity:1, duration:1, onStart:()=>{h1BeforeAnimation.pause(0)}, onComplete:()=>{h1BeforeAnimation.resume()}})
                 .to('.section2',{opacity:0, duration:1, delay:1})
