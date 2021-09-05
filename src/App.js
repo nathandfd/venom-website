@@ -281,8 +281,8 @@ function App({completeText, cursorRef}) {
                 <Suspense fallback={null}>
                     <group ref={parallaxObjParent}>
                         <VideoRect loaded={setParallaxObjLoaded} position={[0.3,-0.1,4]}/>
-                        <ImageRect imageLink={'/buisness.jpg'} rotation={[0,0,0.1]} position={[0.3,-0.1,3.9]}/>
-                        <ImageRect imageLink={'/office.jpg'} rotation={[0,0,-0.1]} position={[0.3,-0.1,3.9]}/>
+                        <ImageRect imageLink={'/partenaire.png'} rotation={[0,0,0.1]} position={[0.3,-0.1,3.9]}/>
+                        <ImageRect imageLink={'/recrutement.jpg'} rotation={[0,0,-0.1]} position={[0.3,-0.1,3.9]}/>
                     </group>
                 </Suspense>
             </Canvas>
