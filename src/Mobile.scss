@@ -129,4 +129,38 @@
     height: 3rem;
     font-size: .8em;
   }
+
+  /* Form */
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    margin: 2rem auto 0 auto;
+
+    input {
+      margin-bottom: 2rem;
+      margin-right: auto;
+      margin-left: auto;
+      border: 1px darkred solid;
+      background-color: transparent;
+      padding: .5rem;
+      font-size: 1.2em;
+      outline: none;
+      color: white;
+    }
+
+    .row {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+  }
+
+
+  /**/
 }
