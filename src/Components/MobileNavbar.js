@@ -11,16 +11,16 @@ export const MobileNavbar = ()=>{
 
     const closeMenu = ()=>{
         html.style.overflow = "auto"
-
         gsap.to(menu.current, {
             xPercent: 0,
             duration: .3
         })
+        gsap.set(menu.current, {display:"none", delay:.3})
     }
 
     const openMenu = ()=>{
         html.style.overflow = "hidden"
-
+        gsap.set(menu.current, {display:"flex"})
         gsap.to(menu.current, {
             xPercent: -100,
             duration: .3

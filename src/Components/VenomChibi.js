@@ -16,14 +16,24 @@ const Chibi = ({SceneRef, setChibiLoaded})=>{
     )
 }
 
+const LoadingScreen = ()=>{
+    return(
+        <>
+            <h1 style={{color:"blue",fontSize:"2em"}}>YOOOOOO</h1>
+        </>
+    )
+}
+
 export const VenomChibi = ({SceneRef, setChibiLoaded})=>{
     return(
-        <Canvas id={"canvas"} dpr={Math.min(window.devicePixelRatio, 1)}>
-            <ambientLight intensity={0.4} />
-            <pointLight color="white" intensity={0.8} position={[-5, 5, 5]} />
-            <Suspense fallback={null}>
-                <Chibi SceneRef={SceneRef} setChibiLoaded={setChibiLoaded} />
-            </Suspense>
-        </Canvas>
+        <Suspense fallback={<LoadingScreen/>}>
+            <Canvas id={"canvas"} dpr={Math.min(window.devicePixelRatio, 1)}>
+                <ambientLight intensity={0.4} />
+                <pointLight color="white" intensity={0.8} position={[-5, 5, 5]} />
+                <Suspense fallback={null}>
+                    <Chibi SceneRef={SceneRef} setChibiLoaded={setChibiLoaded} />
+                </Suspense>
+            </Canvas>
+        </Suspense>
     )
 }
