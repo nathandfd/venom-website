@@ -1,6 +1,6 @@
 import './App.scss';
 import {Canvas, useFrame, useLoader} from '@react-three/fiber'
-import {useEffect, useRef, useState, Suspense} from "react";
+import React, {useEffect, useRef, useState, Suspense} from "react";
 import {gsap} from 'gsap'
 import {Button} from "./Components/Button";
 import {TextureLoader} from "three";
@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CSSRulePlugin } from "gsap/CSSRulePlugin";
 import {NavLink} from "./Components/NavLink";
 import {ReadingMenu} from "./Components/ReadingMenu";
+import {LoadingScreen} from "./Components/LoadingScreen";
 
 gsap.registerPlugin(ScrollTrigger, CSSRulePlugin)
 
@@ -275,17 +276,17 @@ function App({completeText, cursorRef}) {
             <p onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={()=>{setMenuVisibility('legalNotices')}}>Mentions légales</p>
         </div>
         <div className={"canvas"}>
-            <Canvas linear={true} dpr={Math.min(window.devicePixelRatio, 1)}>
-                {/*<ambientLight color={"#fff"}/>*/}
-                <Background position={[0,0,4.5]}/>
-                <Suspense fallback={null}>
+            <Suspense fallback={<LoadingScreen/>}>
+                <Canvas linear={true} dpr={Math.min(window.devicePixelRatio, 1)}>
+                    {/*<ambientLight color={"#fff"}/>*/}
+                    <Background position={[0,0,4.5]}/>
                     <group ref={parallaxObjParent}>
                         <VideoRect loaded={setParallaxObjLoaded} position={[0.3,-0.1,4]}/>
                         <ImageRect imageLink={'/partenaire.png'} rotation={[0,0,0.1]} position={[0.3,-0.1,3.9]}/>
                         <ImageRect imageLink={'/recrutement.jpg'} rotation={[0,0,-0.1]} position={[0.3,-0.1,3.9]}/>
                     </group>
-                </Suspense>
-            </Canvas>
+                </Canvas>
+            </Suspense>
         </div>
         <ReadingMenu text={completeText[sectionText]} visibility={menuVisibility} setVisibility={setVisibility} cursorRef={cursorRef}/>
     </div>
