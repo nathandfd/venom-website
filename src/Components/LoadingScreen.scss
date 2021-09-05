@@ -1,0 +1,113 @@
+.loadingScreen{
+    display: flex;
+    position: fixed;
+    inset: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #242424;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .loader-animation{
+        position: relative;
+
+        .logo-container{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            inset: 0;
+            .v-logo{
+                position: absolute;
+                width: 100%;
+                height: 5rem;
+                top: 25%;
+                left: 47%;
+
+                &:before, &:after{
+                    position: absolute;
+                    content: '';
+                    width: 5px;
+                    height: 40px;
+                    background-color: darkred;
+                    border-bottom-left-radius: 50px;
+                    border-bottom-right-radius: 50px;
+
+                    transform: rotate(-22.5deg);
+                    transform-origin: bottom;
+                }
+
+                &:after{
+                    left: -1px;
+                    transform: rotate(22.5deg);
+                }
+            }
+        }
+
+        .animation-container{
+            width: 100px;
+            height: 58px;
+            z-index: 1000;
+            pointer-events: none;
+            will-change: width;
+            transform-origin: center center;
+            animation: loading infinite 3s forwards ease-in-out;
+            box-sizing: content-box;
+            position: relative;
+            margin-top: 2rem;
+            margin-bottom: 5rem;
+
+            .animation-rect{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-left: 4px solid darkred;
+                border-right: 4px solid darkred;
+                transform-origin: center center;
+            }
+
+            .animation-rect:nth-child(1){
+                transform: rotateZ(90deg);
+            }
+
+            .animation-rect:nth-child(2){
+                transform: rotateZ(210deg);
+            }
+
+            .animation-rect:nth-child(3){
+                transform: rotateZ(330deg);
+            }
+        }
+    }
+}
+
+@keyframes loading {
+    0%{
+        transform: rotate(0deg);
+        width: 120px;
+    }
+    5%{
+        transform: rotate(0deg);
+        width: 120px;
+    }
+    20%{
+        transform: rotate(0deg);
+        width: 100px;
+    }
+    80%{
+        transform: rotate(3*360deg);
+        width: 100px;
+    }
+    95%{
+        transform: rotate(3*360deg);
+        width: 120px;
+    }
+    100%{
+        transform: rotate(3*360deg);
+        width: 120px;
+    }
+}
