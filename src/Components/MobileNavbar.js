@@ -48,8 +48,8 @@ export const MobileNavbar = ()=>{
                 <ul>
                     <li><NavLink closeFunction={closeMenu} scrollToAnchor={"#presentation"} text={"Présentation"} /></li>
                     <li><NavLink closeFunction={closeMenu} scrollToAnchor={"#partenaire"} text={"Partenaire"} /></li>
+                    <li><NavLink closeFunction={closeMenu} scrollToAnchor={"#knowledges"} text={"Savoir-faire"} /></li>
                     <li><NavLink closeFunction={closeMenu} scrollToAnchor={"#recrutement"} text={"Recrutement"} /></li>
-                    <li><NavLink closeFunction={closeMenu} scrollToAnchor={"#recrutement"} text={"Contact"} /></li>
                 </ul>
             </div>
         </div>

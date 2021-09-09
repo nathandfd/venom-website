@@ -89,6 +89,23 @@ const completeText = {
                 <h2>Alors, qu'attendez-vous ?</h2>
             </>
     },
+    knowledges:{
+        title:"Notre savoir-faire",
+        text:
+            <>
+                <h2>Savoir-faire</h2>
+                <form>
+                    <div className={"row"}>
+                        <input type="text" name={"name"} placeholder={"Nom"}/>
+                        <input type="text" name={"firstname"} placeholder={"Prénom"}/>
+                    </div>
+                    <input type="mail" name={"email"} placeholder={"E-mail"}/>
+                    <input type="text" name={"sujet"} placeholder={"Sujet"}/>
+                    <input type="text" name={"message"} placeholder={"votre message..."}/>
+                    <input type="submit" value={"Envoyer"}/>
+                </form>
+            </>
+    },
     contact:{
         title:"Nous contacter",
         text:

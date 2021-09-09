@@ -132,7 +132,7 @@ function App({completeText, cursorRef}) {
                 }
             })
 
-            for (let i = 0; i<3; i++){
+            for (let i = 0; i<4; i++){
                 if (!isHidden(floatingTextList[i])){
                     if (floatingTextList[i].classList.contains("floating-left")){
                         gsap.to(floatingTextList[i], {
@@ -150,7 +150,7 @@ function App({completeText, cursorRef}) {
             }
         }
 
-        for (let i = 0; i<3; i++){
+        for (let i = 0; i<4; i++){
             if (floatingTextList[i].classList.contains("floating-left")){
                 gsap.to(floatingTextList[i], {
                     left: -(window.innerWidth  / window.innerWidth) + 10 + 'vw',
@@ -210,6 +210,13 @@ function App({completeText, cursorRef}) {
                 .to(parallaxObjParent.current.children[1].position,{z:'-=0.1', duration:1},'<')
                 .set('.section3',{visibility:'visible'})
                 .fromTo('.section3',{opacity:0},{opacity:1, duration:1, onStart:()=>{h1BeforeAnimation.pause(0)}, onComplete:()=>{h1BeforeAnimation.resume()}})
+                .to('.section3',{opacity:0, duration:1, delay:1})
+                .set('.section3',{visibility:'hidden'})
+                .to(parallaxObjParent.current.position,{x:-1, duration:1})
+                .to(parallaxObjParent.current.children[3].position,{z:'+=0.1', duration:1},'<')
+                .to(parallaxObjParent.current.children[2].position,{z:'-=0.1', duration:1},'<')
+                .set('.section4',{visibility:'visible'})
+                .fromTo('.section4',{opacity:0},{opacity:1, duration:1, onStart:()=>{h1BeforeAnimation.pause(0)}, onComplete:()=>{h1BeforeAnimation.resume()}})
         }
     },[parallaxObjLoaded])
 
@@ -219,11 +226,11 @@ function App({completeText, cursorRef}) {
             <div className="navbar">
                 <div className="blurred-background"></div>
                 <ul>
-                    <li><NavLink scrollToAnchor={1500} text={"Présentation"} cursorRef={cursorRef}/></li>
-                    <li><NavLink scrollToAnchor={3500} text={"Partenaire"} cursorRef={cursorRef}/></li>
+                    <li><NavLink scrollToAnchor={1000} text={"Présentation"} cursorRef={cursorRef}/></li>
+                    <li><NavLink scrollToAnchor={2400} text={"Partenaire"} cursorRef={cursorRef}/></li>
                     <li><img src="/venom-logo.png" alt=""/></li>
+                    <li><NavLink scrollToAnchor={4200} text={"Savoir-faire"} cursorRef={cursorRef}/></li>
                     <li><NavLink scrollToAnchor={6000} text={"Recrutement"} cursorRef={cursorRef}/></li>
-                    <li><NavLink scrollToAnchor={6000} text={"Contact"} cursorRef={cursorRef}/></li>
                 </ul>
             </div>
             <div className={"scroll-down"}>
@@ -259,9 +266,18 @@ function App({completeText, cursorRef}) {
                 </div>
             </div>
         </div>
-        <div id={"recrutement"} className="section section3">
+        <div id={"knowledges"} className="section section3">
             <div className="centering-div">
                 <div className="floating-text floating-left">
+                    <h1 className={"sectionTitle"}>Savoir-faire</h1>
+                    <p>VENOM est partenaire d’ENGIE, fournisseur historique de gaz. Notre seule volonté est de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. C’est pourquoi nous mobilisons nos forces de vente afin de promouvoir les offres d’ENGIE.</p>
+                    <Button text={"En savoir plus"} cursorRef={cursorRef} onClick={()=>{setMenuVisibility('knowledges')}} />
+                </div>
+            </div>
+        </div>
+        <div id={"recrutement"} className="section section4">
+            <div className="centering-div">
+                <div className="floating-text floating-right">
                     <h1 className={"sectionTitle"}>Recrutement</h1>
                     <p>Venom recrute à travers toute la France pour mener à bien ses objectifs. Conseillers Commerciaux, Managers Commerciaux ou encore Directeurs d’agences, nous recherchons nos futurs collaborateurs.Vous pensez avoir l’âme d’un super-héros de la vente ? Lancez-vous et rejoignez l’un de nos services : commercial ou back-office.</p>
                     <Button text={"En savoir plus"} cursorRef={cursorRef} onClick={()=>{setMenuVisibility('recrutement')}} />
@@ -281,6 +297,7 @@ function App({completeText, cursorRef}) {
                     <group ref={parallaxObjParent}>
                         <VideoRect loaded={setParallaxObjLoaded} position={[0.3,-0.1,4]}/>
                         <ImageRect imageLink={'/partenaire.png'} rotation={[0,0,0.1]} position={[0.3,-0.1,3.9]}/>
+                        <ImageRect imageLink={'/partenaire.png'} rotation={[0,0,-0.05]} position={[0.3,-0.1,3.9]}/>
                         <ImageRect imageLink={'/recrutement.jpg'} rotation={[0,0,-0.1]} position={[0.3,-0.1,3.9]}/>
                     </group>
                 </Canvas>

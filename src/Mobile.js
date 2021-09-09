@@ -13,6 +13,7 @@ gsap.registerPlugin(CSSRulePlugin)
 const section1H1 = CSSRulePlugin.getRule('.Mobile .section1 h1:before')
 const section2H1 = CSSRulePlugin.getRule('.Mobile .section2 h1:before')
 const section3H1 = CSSRulePlugin.getRule('.Mobile .section3 h1:before')
+const section4H1 = CSSRulePlugin.getRule('.Mobile .section4 h1:before')
 
 const timeline = gsap.timeline({
     scrollTrigger:{
@@ -109,6 +110,22 @@ export const Mobile = ({completeText})=>{
                 },
                 duration: 0.7
             })
+
+        gsap.fromTo(section4H1, {
+                cssRule:{
+                    width:"0%"
+                }
+            },
+            {
+                scrollTrigger:{
+                    trigger: ".section4",
+                    start: "top center"
+                },
+                cssRule:{
+                    width:"95%"
+                },
+                duration: 0.7
+            })
     }, [])
 
     return(
@@ -152,9 +169,19 @@ export const Mobile = ({completeText})=>{
                     </div>
                 </div>
             </div>
-            <div id={"recrutement"} className="section section3">
+            <div id={"knowledges"} className="section section3">
                 <div className="centering-div">
                     <div className="floating-text floating-left">
+                        <h1 className={"sectionTitle"}>Savoir-faire</h1>
+                        <img src="/partenaire.png" alt=""/>
+                        <p>VENOM est partenaire d’ENGIE, fournisseur historique de gaz. Notre seule volonté est de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. C’est pourquoi nous mobilisons nos forces de vente afin de promouvoir les offres d’ENGIE.</p>
+                        <MobileButton text={"En savoir plus"} onClick={()=>{setMenuVisibility('knowledges')}} />
+                    </div>
+                </div>
+            </div>
+            <div id={"recrutement"} className="section section4">
+                <div className="centering-div">
+                    <div className="floating-text floating-right">
                         <h1 className={"sectionTitle"}>Nous recrutons !</h1>
                         <img src="/recrutement.jpg" alt=""/>
                         <p>Venom recrute à travers toute la France pour mener à bien ses objectifs. Conseillers Commerciaux, Managers Commerciaux ou encore Directeurs d’agences, nous recherchons nos futurs collaborateurs.Vous pensez avoir l’âme d’un super-héros de la vente ?<br/> Lancez-vous et rejoignez l’un de nos services : commercial ou back-office.</p>
