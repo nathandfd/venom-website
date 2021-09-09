@@ -173,7 +173,7 @@ export const Mobile = ({completeText})=>{
                 <div className="centering-div">
                     <div className="floating-text floating-left">
                         <h1 className={"sectionTitle"}>Savoir-faire</h1>
-                        <img src="/partenaire.png" alt=""/>
+                        <img src="/knowledges.jpg" alt=""/>
                         <p>VENOM est partenaire d’ENGIE, fournisseur historique de gaz. Notre seule volonté est de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. C’est pourquoi nous mobilisons nos forces de vente afin de promouvoir les offres d’ENGIE.</p>
                         <MobileButton text={"En savoir plus"} onClick={()=>{setMenuVisibility('knowledges')}} />
                     </div>
