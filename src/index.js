@@ -93,17 +93,33 @@ const completeText = {
         title:"Notre savoir-faire",
         text:
             <>
-                <h2>Savoir-faire</h2>
-                <form>
-                    <div className={"row"}>
-                        <input type="text" name={"name"} placeholder={"Nom"}/>
-                        <input type="text" name={"firstname"} placeholder={"Prénom"}/>
-                    </div>
-                    <input type="mail" name={"email"} placeholder={"E-mail"}/>
-                    <input type="text" name={"sujet"} placeholder={"Sujet"}/>
-                    <input type="text" name={"message"} placeholder={"votre message..."}/>
-                    <input type="submit" value={"Envoyer"}/>
-                </form>
+                <h2>Le service administratif</h2>
+                <ul>
+                    <li>Joue le rôle d'interface entre nos forces de vente et nos partenaires</li>
+                    <li>Réceptionne les dossiers clients</li>
+                    <li>Gère toute la partie logistique</li>
+                </ul>
+                <h2>Le service ressources humaines</h2>
+                <ul>
+                    <li>Assure un suivi des forces de ventes</li>
+                    <li>Gère le recrutement de nos futurs collaborateurs</li>
+                    <li>Propose un plan de carrière et des formations en interne</li>
+                </ul>
+                <h2>Le service qualité</h2>
+                <ul>
+                    <li>Contrôle les dossiers clients</li>
+                    <li>Confirme ou annule les offres proposées en contactant les clients</li>
+                    <li>Contrôle le déroulement des entretiens entre conseillers et clients</li>
+                </ul>
+                <h2>Le service communication</h2>
+                <ul>
+                    <li>
+                        Conçoit et réalise différents supports de communication, web ou print, à destination de nos forces de vente, mais aussi du grand public
+                    </li>
+                    <li>
+                        Gère l'image de la société
+                    </li>
+                </ul>
             </>
     },
     contact:{

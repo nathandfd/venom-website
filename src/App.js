@@ -270,7 +270,7 @@ function App({completeText, cursorRef}) {
             <div className="centering-div">
                 <div className="floating-text floating-left">
                     <h1 className={"sectionTitle"}>Savoir-faire</h1>
-                    <p>VENOM est partenaire d’ENGIE, fournisseur historique de gaz. Notre seule volonté est de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. C’est pourquoi nous mobilisons nos forces de vente afin de promouvoir les offres d’ENGIE.</p>
+                    <p>Notre société VENOM est composée de plusieurs services : le service administratif, le service qualité, le service ressources humaines et enfin le service communication. Chacun de nos services assurent le bon fonctionnement de notre société, le suivi de nos forces de vente et la satisfaction de nos clients.</p>
                     <Button text={"En savoir plus"} cursorRef={cursorRef} onClick={()=>{setMenuVisibility('knowledges')}} />
                 </div>
             </div>
