@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -7,6 +7,7 @@ import {Mobile} from "./Mobile";
 import {
     BrowserView,
     MobileView,
+    TabletView
 } from "react-device-detect";
 import {Cursor} from "./Components/Cursor";
 
@@ -126,17 +127,17 @@ const completeText = {
         title:"Nous contacter",
         text:
             <>
-                <h2>Ne fonctionne pas pour le moment !</h2>
-                <form>
+                <form id={"contactForm"}>
                     <div className={"row"}>
-                        <input type="text" name={"name"} placeholder={"Nom"}/>
-                        <input type="text" name={"firstname"} placeholder={"Prénom"}/>
+                        <input type="text" required={true} name={"name"} placeholder={"Nom"}/>
+                        <input type="text" required={true} name={"fname"} placeholder={"Prénom"}/>
                     </div>
-                    <input type="mail" name={"email"} placeholder={"E-mail"}/>
-                    <input type="text" name={"sujet"} placeholder={"Sujet"}/>
-                    <input type="text" name={"message"} placeholder={"votre message..."}/>
-                    <input type="submit" value={"Envoyer"}/>
+                    <input type="mail" required={true} name={"mail"} placeholder={"E-mail"}/>
+                    <input type="text" required={true} name={"object"} placeholder={"Sujet"}/>
+                    <input type="text" required={true} name={"msg"} placeholder={"votre message..."}/>
+                    <input id={"send-form"} type="submit" value={"Envoyer"}/>
                 </form>
+                <h2 id={"form-message"}></h2>
             </>
     },
     legalNotices:{
@@ -366,6 +367,9 @@ ReactDOM.render(
           <Cursor cursorRef={cursorRef}/>
           <App cursorRef={cursorRef} completeText={completeText} />
       </BrowserView>
+      <TabletView>
+          <Mobile completeText={completeText} />
+      </TabletView>
       <MobileView>
           <Mobile completeText={completeText} />
       </MobileView>

@@ -127,7 +127,7 @@ function App({completeText, cursorRef}) {
                 onUpdate: () => {
                     let tempSortedArray = [...parallaxObjParent.current.children]
                     for (let i = 0; i < tempSortedArray.length; i++) {
-                        tempSortedArray[i].position.set(-(e.clientX * (0.02) / window.innerWidth) + 0.5, (e.clientY * (0.02) / window.innerHeight) - 0.1)
+                        tempSortedArray[i].position.set(-(e.clientX * (0.02) / window.innerWidth) + .8, (e.clientY * (0.02) / window.innerHeight) - 0.1)
                     }
                 }
             })
@@ -198,7 +198,7 @@ function App({completeText, cursorRef}) {
                 .set('.header',{visibility:'hidden'})
                 .to('.section1',{opacity:0, duration:1, delay:1})
                 .set('.section1',{visibility:'hidden'})
-                .to(parallaxObjParent.current.position,{x:-1, duration:1})
+                .to(parallaxObjParent.current.position,{x:-1.6, duration:1})
                 .to(parallaxObjParent.current.children[1].position,{z:'+=0.1', duration:1},'<')
                 .to(parallaxObjParent.current.children[0].position,{z:'-=0.1', duration:1, onReverseComplete:()=>{video.play()}, onComplete:()=>{video.currentTime = 0;video.pause()}},'<')
                 .set('.section2',{visibility:'visible'})
@@ -212,7 +212,7 @@ function App({completeText, cursorRef}) {
                 .fromTo('.section3',{opacity:0},{opacity:1, duration:1, onStart:()=>{h1BeforeAnimation.pause(0)}, onComplete:()=>{h1BeforeAnimation.resume()}})
                 .to('.section3',{opacity:0, duration:1, delay:1})
                 .set('.section3',{visibility:'hidden'})
-                .to(parallaxObjParent.current.position,{x:-1, duration:1})
+                .to(parallaxObjParent.current.position,{x:-1.6, duration:1})
                 .to(parallaxObjParent.current.children[3].position,{z:'+=0.1', duration:1},'<')
                 .to(parallaxObjParent.current.children[2].position,{z:'-=0.1', duration:1},'<')
                 .set('.section4',{visibility:'visible'})
@@ -295,10 +295,10 @@ function App({completeText, cursorRef}) {
                     {/*<ambientLight color={"#fff"}/>*/}
                     <Background position={[0,0,4.5]}/>
                     <group ref={parallaxObjParent}>
-                        <VideoRect loaded={setParallaxObjLoaded} position={[0.3,-0.1,4]}/>
-                        <ImageRect imageLink={'/partenaire.png'} rotation={[0,0,0.1]} position={[0.3,-0.1,3.9]}/>
-                        <ImageRect imageLink={'/knowledges.jpg'} rotation={[0,0,-0.05]} position={[0.3,-0.1,3.9]}/>
-                        <ImageRect imageLink={'/recrutement.jpg'} rotation={[0,0,-0.1]} position={[0.3,-0.1,3.9]}/>
+                        <VideoRect loaded={setParallaxObjLoaded} position={[1.2,-0.1,3.7]}/>
+                        <ImageRect imageLink={'/partenaire.png'} rotation={[0,0,0.1]} position={[1.2,-0.1,3.6]}/>
+                        <ImageRect imageLink={'/knowledges.jpg'} rotation={[0,0,-0.05]} position={[1.2,-0.1,3.6]}/>
+                        <ImageRect imageLink={'/recrutement.jpg'} rotation={[0,0,-0.1]} position={[1.2,-0.1,3.6]}/>
                     </group>
                 </Canvas>
             </Suspense>

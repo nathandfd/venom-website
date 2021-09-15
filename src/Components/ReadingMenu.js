@@ -28,6 +28,44 @@ export const ReadingMenu = ({cursorRef, visibility, text, setVisibility})=>{
             gsap.set('.reading-menu-container', {display:'block'})
             gsap.to('.reading-menu',{bottom:'0%', ease:'power4', duration:1})
             gsap.to('.reading-menu-container', {backgroundColor: 'rgba(0,0,0,.6)', duration: .7})
+
+            if (document.getElementById("contactForm")){
+                const sendButton = document.getElementById("send-form")
+
+                sendButton.addEventListener('click',(e)=>{
+                    e.preventDefault()
+                    const headers = new Headers()
+                    const formData = new FormData(document.getElementById("contactForm"))
+                    const formMessage = document.getElementById("form-message")
+                    const myInit = {
+                        method: 'POST',
+                        headers:headers,
+                        mode: 'cors',
+                        cache: 'default',
+                        body: formData
+                    };
+
+                    sendButton.value = "Envoi en cours..."
+
+                    fetch('send_mail.php',myInit)
+                        .then(resp=>resp.json())
+                        .then((data)=>{
+                            if (data){
+                                formMessage.innerHTML = "Votre message à bien été envoyé ! Venom vous répondra d'ici peu"
+                            }
+                            else{
+                                formMessage.innerHTML = "Aïe, quelque chose s'est mal passé. Veuillez recommencer"
+                            }
+                            sendButton.value = "Envoyer"
+                            document.getElementById("contactForm").reset()
+                        })
+                        .catch(()=>{
+                            formMessage.innerHTML = "Erreur réseau"
+                            sendButton.value = "Envoyer"
+                            document.getElementById("contactForm").reset()
+                        })
+                })
+            }
         }
         else{
             gsap.set('html',{overflow: 'auto'})
