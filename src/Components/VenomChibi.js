@@ -3,7 +3,7 @@ import {Canvas, useLoader} from "@react-three/fiber";
 import React, {useEffect, Suspense, useState} from "react";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
-import venomChibi from '../Assets/venom_chibi4/venom.gltf'
+import venomChibi from '../Assets/venom_chibi/venom.glb'
 import {LoadingScreen} from "./LoadingScreen";
 import {useGLTF} from "@react-three/drei";
 
