@@ -4,9 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Mobile} from "./Mobile";
+import {Tablet} from "./Tablet";
 import {
     BrowserView,
-    MobileView,
+    MobileOnlyView,
     TabletView
 } from "react-device-detect";
 import {Cursor} from "./Components/Cursor";
@@ -368,11 +369,12 @@ ReactDOM.render(
           <App cursorRef={cursorRef} completeText={completeText} />
       </BrowserView>
       <TabletView>
-          <Mobile completeText={completeText} />
+          <Tablet completeText={completeText} />
       </TabletView>
-      <MobileView>
+      <MobileOnlyView>
           <Mobile completeText={completeText} />
-      </MobileView>
+      </MobileOnlyView>
+
   </React.StrictMode>,
   document.getElementById('root')
 );

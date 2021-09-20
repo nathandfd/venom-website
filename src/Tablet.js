@@ -10,10 +10,10 @@ import { CSSRulePlugin } from "gsap/CSSRulePlugin";
 
 gsap.registerPlugin(CSSRulePlugin)
 
-const section1H1 = CSSRulePlugin.getRule('.Mobile .section1 h1:before')
-const section2H1 = CSSRulePlugin.getRule('.Mobile .section2 h1:before')
-const section3H1 = CSSRulePlugin.getRule('.Mobile .section3 h1:before')
-const section4H1 = CSSRulePlugin.getRule('.Mobile .section4 h1:before')
+const section1H1 = CSSRulePlugin.getRule('.Tablet .section1 h1:before')
+const section2H1 = CSSRulePlugin.getRule('.Tablet .section2 h1:before')
+const section3H1 = CSSRulePlugin.getRule('.Tablet .section3 h1:before')
+const section4H1 = CSSRulePlugin.getRule('.Tablet .section4 h1:before')
 
 const timeline = gsap.timeline({
     scrollTrigger:{
@@ -129,13 +129,13 @@ export const Tablet = ({completeText})=>{
     }, [])
 
     return(
-        <div className="Mobile" style={{'backgroundColor':'#121212'}}>
+        <div className="Tablet" style={{'backgroundColor':'#121212'}}>
             <MobileNavbar/>
             <div className="header">
                 <div className="background">
                     <div className="background1">
                         <h1>
-                            Rejoins l’aventure et deviens commercial chez Venom !
+                            Rejoins l’aventure et deviens commercial chez Venom ! OUIIIU
                         </h1>
                     </div>
                     <div className="background2"></div>
@@ -150,10 +150,10 @@ export const Tablet = ({completeText})=>{
             </div>
             <div id={"presentation"} className="section section1">
                 <div className={"centering-div"}>
+                    <video controls={true} src="/video-presentation.mp4"></video>
                     <div className="floating-text floating-left">
                         <h1 className={"sectionTitle"}>Présentation</h1>
                         {/*<img src="/office.jpg" alt=""/>*/}
-                        <video controls={true} src="/video-presentation.mp4"></video>
                         <p>VENOM est un réseau de distribution commercial qui est présent sur des marchés porteurs tels que la fourniture d’énergie, l’assurance ou encore la presse. Nous proposons par l’intermédiaire de nos forces de vente les offres les plus compétitives du marché actuel.</p>
                         <MobileButton text={"Découvrir"} onClick={()=>{setMenuVisibility('presentation')}} />
                     </div>
@@ -163,17 +163,18 @@ export const Tablet = ({completeText})=>{
                 <div className="centering-div">
                     <div className="floating-text floating-right">
                         <h1 className={"sectionTitle"}>Partenaire</h1>
-                        <img src="/partenaire.png" alt=""/>
                         <p>VENOM est partenaire d’ENGIE, fournisseur historique de gaz. Notre seule volonté est de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. C’est pourquoi nous mobilisons nos forces de vente afin de promouvoir les offres d’ENGIE.</p>
                         <MobileButton text={"En savoir plus"} onClick={()=>{setMenuVisibility('partenaire')}} />
                     </div>
+                    <img src="/partenaire.png" alt=""/>
                 </div>
             </div>
             <div id={"knowledges"} className="section section3">
                 <div className="centering-div">
+                    <img src="/knowledges.jpg" alt=""/>
+
                     <div className="floating-text floating-left">
                         <h1 className={"sectionTitle"}>Savoir-faire</h1>
-                        <img src="/knowledges.jpg" alt=""/>
                         <p>VENOM est partenaire d’ENGIE, fournisseur historique de gaz. Notre seule volonté est de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. C’est pourquoi nous mobilisons nos forces de vente afin de promouvoir les offres d’ENGIE.</p>
                         <MobileButton text={"En savoir plus"} onClick={()=>{setMenuVisibility('knowledges')}} />
                     </div>
@@ -183,13 +184,14 @@ export const Tablet = ({completeText})=>{
                 <div className="centering-div">
                     <div className="floating-text floating-right">
                         <h1 className={"sectionTitle"}>Nous recrutons !</h1>
-                        <img src="/recrutement.jpg" alt=""/>
                         <p>Venom recrute à travers toute la France pour mener à bien ses objectifs. Conseillers Commerciaux, Managers Commerciaux ou encore Directeurs d’agences, nous recherchons nos futurs collaborateurs.Vous pensez avoir l’âme d’un super-héros de la vente ?<br/> Lancez-vous et rejoignez l’un de nos services : commercial ou back-office.</p>
                         <div className={"double-button"}>
                             <MobileButton text={"En savoir plus"} onClick={()=>{setMenuVisibility('recrutement')}} />
                             <MobileButton text={"Nous rejoindre"} onClick={()=>{setMenuVisibility('contact')}} />
                         </div>
                     </div>
+                    <img src="/recrutement.jpg" alt=""/>
+
                 </div>
             </div>
             <div className={"footer"}>

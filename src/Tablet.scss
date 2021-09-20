@@ -14,6 +14,12 @@
   .section{
     margin-top: 5rem;
 
+    .centering-div{
+      display: flex;
+      flex-direction: row;
+      position: relative;
+    }
+
     p{
       line-height: 1.5em;
     }
@@ -25,7 +31,7 @@
     }
 
     img, video{
-      width: 80%;
+      width: 50%;
       height: auto;
       margin: 0 auto;
     }
