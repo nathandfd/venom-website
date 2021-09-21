@@ -119,7 +119,7 @@ export const Tablet = ({completeText})=>{
             {
                 scrollTrigger:{
                     trigger: ".section4",
-                    start: "top center"
+                    start: "center bottom"
                 },
                 cssRule:{
                     width:"95%"
@@ -135,7 +135,7 @@ export const Tablet = ({completeText})=>{
                 <div className="background">
                     <div className="background1">
                         <h1>
-                            Rejoins l’aventure et deviens commercial chez Venom ! OUIIIU
+                            Rejoins l’aventure et deviens commercial chez Venom !
                         </h1>
                     </div>
                     <div className="background2"></div>
@@ -149,49 +149,46 @@ export const Tablet = ({completeText})=>{
                 <VenomChibi setChibiLoaded={setChibiLoaded} SceneRef={venomChibi} />
             </div>
             <div id={"presentation"} className="section section1">
-                <div className={"centering-div"}>
+                <div className={"img-container"}>
                     <video controls={true} src="/video-presentation.mp4"></video>
-                    <div className="floating-text floating-left">
-                        <h1 className={"sectionTitle"}>Présentation</h1>
-                        {/*<img src="/office.jpg" alt=""/>*/}
-                        <p>VENOM est un réseau de distribution commercial qui est présent sur des marchés porteurs tels que la fourniture d’énergie, l’assurance ou encore la presse. Nous proposons par l’intermédiaire de nos forces de vente les offres les plus compétitives du marché actuel.</p>
-                        <MobileButton text={"Découvrir"} onClick={()=>{setMenuVisibility('presentation')}} />
-                    </div>
+                </div>
+                <div className={"text-container"}>
+                    <h1 className={"sectionTitle"}>Présentation</h1>
+                    <p>VENOM est un réseau de distribution commercial qui est présent sur des marchés porteurs tels que la fourniture d’énergie, l’assurance ou encore la presse. Nous proposons par l’intermédiaire de nos forces de vente les offres les plus compétitives du marché actuel.</p>
+                    <MobileButton text={"Découvrir"} onClick={()=>{setMenuVisibility('presentation')}} />
                 </div>
             </div>
             <div id={"partenaire"} className="section section2">
-                <div className="centering-div">
-                    <div className="floating-text floating-right">
-                        <h1 className={"sectionTitle"}>Partenaire</h1>
-                        <p>VENOM est partenaire d’ENGIE, fournisseur historique de gaz. Notre seule volonté est de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. C’est pourquoi nous mobilisons nos forces de vente afin de promouvoir les offres d’ENGIE.</p>
-                        <MobileButton text={"En savoir plus"} onClick={()=>{setMenuVisibility('partenaire')}} />
-                    </div>
+                <div className={"text-container"}>
+                    <h1 className={"sectionTitle"}>Partenaire</h1>
+                    <p>VENOM est partenaire d’ENGIE, fournisseur historique de gaz. Notre seule volonté est de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. C’est pourquoi nous mobilisons nos forces de vente afin de promouvoir les offres d’ENGIE.</p>
+                    <MobileButton text={"En savoir plus"} onClick={()=>{setMenuVisibility('partenaire')}} />
+                </div>
+                <div className={"img-container"}>
                     <img src="/partenaire.png" alt=""/>
                 </div>
             </div>
             <div id={"knowledges"} className="section section3">
-                <div className="centering-div">
+                <div className={"img-container"}>
                     <img src="/knowledges.jpg" alt=""/>
-
-                    <div className="floating-text floating-left">
-                        <h1 className={"sectionTitle"}>Savoir-faire</h1>
-                        <p>VENOM est partenaire d’ENGIE, fournisseur historique de gaz. Notre seule volonté est de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. C’est pourquoi nous mobilisons nos forces de vente afin de promouvoir les offres d’ENGIE.</p>
-                        <MobileButton text={"En savoir plus"} onClick={()=>{setMenuVisibility('knowledges')}} />
-                    </div>
+                </div>
+                <div className={"text-container"}>
+                    <h1 className={"sectionTitle"}>Savoir-faire</h1>
+                    <p>VENOM est partenaire d’ENGIE, fournisseur historique de gaz. Notre seule volonté est de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. C’est pourquoi nous mobilisons nos forces de vente afin de promouvoir les offres d’ENGIE.</p>
+                    <MobileButton text={"En savoir plus"} onClick={()=>{setMenuVisibility('knowledges')}} />
                 </div>
             </div>
             <div id={"recrutement"} className="section section4">
-                <div className="centering-div">
-                    <div className="floating-text floating-right">
-                        <h1 className={"sectionTitle"}>Nous recrutons !</h1>
-                        <p>Venom recrute à travers toute la France pour mener à bien ses objectifs. Conseillers Commerciaux, Managers Commerciaux ou encore Directeurs d’agences, nous recherchons nos futurs collaborateurs.Vous pensez avoir l’âme d’un super-héros de la vente ?<br/> Lancez-vous et rejoignez l’un de nos services : commercial ou back-office.</p>
-                        <div className={"double-button"}>
-                            <MobileButton text={"En savoir plus"} onClick={()=>{setMenuVisibility('recrutement')}} />
-                            <MobileButton text={"Nous rejoindre"} onClick={()=>{setMenuVisibility('contact')}} />
-                        </div>
+                <div className={"text-container"}>
+                    <h1 className={"sectionTitle"}>Nous recrutons !</h1>
+                    <p>Venom recrute à travers toute la France pour mener à bien ses objectifs. Conseillers Commerciaux, Managers Commerciaux ou encore Directeurs d’agences, nous recherchons nos futurs collaborateurs.Vous pensez avoir l’âme d’un super-héros de la vente ?<br/> Lancez-vous et rejoignez l’un de nos services : commercial ou back-office.</p>
+                    <div className={"double-button"}>
+                        <MobileButton text={"En savoir plus"} onClick={()=>{setMenuVisibility('recrutement')}} />
+                        <MobileButton text={"Nous rejoindre"} onClick={()=>{setMenuVisibility('contact')}} />
                     </div>
+                </div>
+                <div className={"img-container"}>
                     <img src="/recrutement.jpg" alt=""/>
-
                 </div>
             </div>
             <div className={"footer"}>

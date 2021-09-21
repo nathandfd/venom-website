@@ -13,27 +13,39 @@
 
   .section{
     margin-top: 5rem;
-
-    .centering-div{
-      display: flex;
-      flex-direction: row;
-      position: relative;
-    }
+    display: flex;
+    flex-direction: row;
+    position: relative;
 
     p{
       line-height: 1.5em;
     }
 
-    .floating-text{
-      display: flex;
-      flex-direction: column;
-      width: 100%;
+    .text-container, .img-container{
+      flex: 1;
+      padding: 1rem;
     }
 
-    img, video{
-      width: 50%;
-      height: auto;
-      margin: 0 auto;
+    .text-container{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 100%;
+
+      h1,p{
+        margin: 0;
+      }
+    }
+
+    .img-container{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img, video{
+        width: 100%;
+        height: auto;
+      }
     }
   }
 
@@ -42,7 +54,6 @@
       font-size: 2.6em;
       position: relative;
       width: max-content;
-      margin: 2rem auto;
       z-index: 1;
       max-width: 100%;
 
@@ -125,6 +136,10 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
+  }
+
+  button {
+    margin: 0 1rem
   }
 
   .footer {
