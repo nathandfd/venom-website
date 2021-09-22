@@ -242,7 +242,7 @@ function App({completeText, cursorRef}) {
             <div className="background">
                 <div className="background1">
                     <h1>
-                        Rejoins l’aventure et deviens commercial chez Venom !
+                        Est-ce que nous ressemblons à des "super-héros" ? Nous sommes des professionnels.
                     </h1>
                 </div>
                 <div className="background2"></div>
