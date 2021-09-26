@@ -9,6 +9,7 @@ import { CSSRulePlugin } from "gsap/CSSRulePlugin";
 import {NavLink} from "./Components/NavLink";
 import {ReadingMenu} from "./Components/ReadingMenu";
 import {LoadingScreen} from "./Components/LoadingScreen";
+import {deviceDetect} from "react-device-detect";
 
 gsap.registerPlugin(ScrollTrigger, CSSRulePlugin)
 

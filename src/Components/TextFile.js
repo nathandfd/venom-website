@@ -72,6 +72,9 @@ export const completeText = {
                     <li>Salaire :  attractif ! Découvrez des fiches de salaire sans plafond !</li>
                     <li>Les petits plus : des tickets restaurants, mais aussi des primes.</li>
                 </ul>
+                <h2>Perspective d'évolution</h2>
+                <img src="/pespectives-commercial.png" alt=""/>
+                <img src="/perspectives-backoffice.png" alt=""/>
                 <h2>Alors, qu'attendez-vous ?</h2>
             </>
     },
