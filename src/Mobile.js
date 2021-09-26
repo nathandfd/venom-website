@@ -135,7 +135,7 @@ export const Mobile = ({completeText})=>{
                 <div className="background">
                     <div className="background1">
                         <h1>
-                            Est-ce que nous ressemblons à des "super-héros" ? Nous sommes des professionnels.
+                            Do we look like ‘super-heroes’? We’re the professionals.
                         </h1>
                     </div>
                     <div className="background2"></div>
