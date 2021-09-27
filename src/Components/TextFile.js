@@ -74,6 +74,7 @@ export const completeText = {
                 </ul>
                 <h2>Perspectives d'évolution</h2>
                 <img src="/pespectives-commercial.png" alt=""/>
+                <br/>
                 <img src="/perspectives-backoffice.png" alt=""/>
                 <h2>Alors, qu'attendez-vous ?</h2>
             </>
