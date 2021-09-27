@@ -163,7 +163,7 @@ export const Mobile = ({completeText})=>{
                 <div className="centering-div">
                     <div className="floating-text floating-right">
                         <h1 className={"sectionTitle"}>Partenaire</h1>
-                        <img src="/partenaire.png" alt=""/>
+                        <img src="/partenaire.jpg" alt=""/>
                         <p>VENOM est partenaire d’ENGIE, fournisseur historique de gaz. Notre seule volonté est de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. C’est pourquoi nous mobilisons nos forces de vente afin de promouvoir les offres d’ENGIE.</p>
                         <MobileButton text={"En savoir plus"} onClick={()=>{setMenuVisibility('partenaire')}} />
                     </div>
@@ -174,7 +174,9 @@ export const Mobile = ({completeText})=>{
                     <div className="floating-text floating-left">
                         <h1 className={"sectionTitle"}>Savoir-faire</h1>
                         <img src="/knowledges.jpg" alt=""/>
-                        <p>VENOM est partenaire d’ENGIE, fournisseur historique de gaz. Notre seule volonté est de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. C’est pourquoi nous mobilisons nos forces de vente afin de promouvoir les offres d’ENGIE.</p>
+                        <p>
+                            La qualité de l'offre Venom repose sur la combinaison de plusieurs services : administratif, qualité, ressources humaines et communication. Chacun d'entre eux participe au bon fonctionnement de notre société, le suivi de nos forces de vente et la satisfaction de nos clients.
+                        </p>
                         <MobileButton text={"En savoir plus"} onClick={()=>{setMenuVisibility('knowledges')}} />
                     </div>
                 </div>

@@ -271,7 +271,9 @@ function App({completeText, cursorRef}) {
             <div className="centering-div">
                 <div className="floating-text floating-left">
                     <h1 className={"sectionTitle"}>Savoir-faire</h1>
-                    <p>Notre société VENOM est composée de plusieurs services : le service administratif, le service qualité, le service ressources humaines et enfin le service communication. Chacun de nos services assurent le bon fonctionnement de notre société, le suivi de nos forces de vente et la satisfaction de nos clients.</p>
+                    <p>
+                        La qualité de l'offre Venom repose sur la combinaison de plusieurs services : administratif, qualité, ressources humaines et communication. Chacun d'entre eux participe au bon fonctionnement de notre société, le suivi de nos forces de vente et la satisfaction de nos clients.
+                    </p>
                     <Button text={"En savoir plus"} cursorRef={cursorRef} onClick={()=>{setMenuVisibility('knowledges')}} />
                 </div>
             </div>
@@ -297,7 +299,7 @@ function App({completeText, cursorRef}) {
                     <Background position={[0,0,4.5]}/>
                     <group ref={parallaxObjParent}>
                         <VideoRect loaded={setParallaxObjLoaded} position={[1.2,-0.1,3.7]}/>
-                        <ImageRect imageLink={'/partenaire.png'} rotation={[0,0,0.1]} position={[1.2,-0.1,3.6]}/>
+                        <ImageRect imageLink={'/partenaire.jpg'} rotation={[0,0,0.1]} position={[1.2,-0.1,3.6]}/>
                         <ImageRect imageLink={'/knowledges.jpg'} rotation={[0,0,-0.05]} position={[1.2,-0.1,3.6]}/>
                         <ImageRect imageLink={'/recrutement.jpg'} rotation={[0,0,-0.1]} position={[1.2,-0.1,3.6]}/>
                     </group>

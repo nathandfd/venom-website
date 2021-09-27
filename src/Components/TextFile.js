@@ -5,10 +5,10 @@ export const completeText = {
             <>
                 <h2>Notre société</h2>
                 <p>
-                    Depuis 2012, année de sa création, VENOM, réseau de distribution commercial, est partenaire d’<bold>ENGIE</bold> (anciennement GDF Suez). Au travers de ces années d’expérience, une seule volonté : celle de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. VENOM est également présent sur des marchés porteurs tels que l’assurance et la presse. Notre société représente ainsi un apport de plus de 30 000 nouveaux clients pour nos partenaires.
+                    Depuis 2012, année de sa création, VENOM, réseau de distribution commercial, est partenaire d’ENGIE (anciennement GDF Suez). Au travers de ces années d’expérience, une seule volonté : celle de permettre aux consommateurs d’avoir accès à une énergie de qualité à un tarif abordable. VENOM est également présent sur des marchés porteurs tels que l’assurance et la presse. Notre société représente ainsi un apport de plus de 30 000 nouveaux clients pour nos partenaires.
                 </p>
                 <p>
-                    Nous mobilisons ainsi nos forces de vente au travers de toute la France. Ces dernières sont chargées de promouvoir les offres de nos partenaires, aux particuliers, mais aussi aux professionnels, dans le but de leur permettre de réaliser des économies. Ainsi, nous recrutons des commerciaux partout en France afin de mener à bien ces objectifs.
+                    Nous mobilisons ainsi nos forces de vente au travers de toute la France. Ces dernières sont chargées de promouvoir les offres de nos partenaires, aux particuliers, mais aussi aux professionnels, dans le but de leur permettre de réaliser des économies. Ainsi, nous recrutons partout en France afin de mener à bien ces objectifs.
                 </p>
                 <h2>Nos valeurs</h2>
                 <h3>Défendre les consommateurs</h3>
@@ -21,7 +21,7 @@ export const completeText = {
                 </p>
                 <h2>Notre savoir-faire</h2>
                 <p>
-                    Chez VENOM, nous ne laissons pas la place au hasard. Nos équipes et nos forces de vente sont formées afin d'être les plus efficaces possible. La qualité est un point essentiel au sein de notre société.
+                    Chez VENOM, nous ne laissons pas la place au hasard. Nos équipes et nos forces de vente sont formées afin d'être les plus efficaces possible tout en offrant un service de back-office performant. La qualité est un point essentiel au sein de notre société.
                 </p>
             </>
     },
@@ -72,7 +72,7 @@ export const completeText = {
                     <li>Salaire :  attractif ! Découvrez des fiches de salaire sans plafond !</li>
                     <li>Les petits plus : des tickets restaurants, mais aussi des primes.</li>
                 </ul>
-                <h2>Perspective d'évolution</h2>
+                <h2>Perspectives d'évolution</h2>
                 <img src="/pespectives-commercial.png" alt=""/>
                 <img src="/perspectives-backoffice.png" alt=""/>
                 <h2>Alors, qu'attendez-vous ?</h2>
