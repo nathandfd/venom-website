@@ -243,7 +243,7 @@ function App({completeText, cursorRef}) {
             <div className="background">
                 <div className="background1">
                     <h1>
-                        Do we look like ‘super-heroes’? We’re the professionals.
+                        Do we look like ‘super-heroes’?<br/>We’re the professionals.
                     </h1>
                 </div>
                 <div className="background2"></div>
@@ -294,7 +294,7 @@ function App({completeText, cursorRef}) {
         </div>
         <div className={"canvas"}>
             <Suspense fallback={<LoadingScreen/>}>
-                <Canvas linear={true} dpr={Math.min(window.devicePixelRatio, 1)}>
+                <Canvas linear={true} dpr={Math.min(window.devicePixelRatio, 1)} camera={{far:5, near:1}}>
                     {/*<ambientLight color={"#fff"}/>*/}
                     <Background position={[0,0,4.5]}/>
                     <group ref={parallaxObjParent}>

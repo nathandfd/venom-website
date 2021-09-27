@@ -36,7 +36,7 @@ export const VenomChibi = ({SceneRef, setChibiLoaded})=>{
     return(
         <Suspense fallback={<LoadingScreen/>}>
             {/*<Test/>*/}
-            <Canvas id={"canvas"} dpr={Math.min(window.devicePixelRatio, 1.5)}>
+            <Canvas id={"canvas"} dpr={Math.min(window.devicePixelRatio, 1.5)} camera={{far:5, near:1}}>
                 <ambientLight intensity={0.4} />
                 <pointLight color="white" intensity={0.8} position={[-5, 5, 5]} />
                 <Chibi SceneRef={SceneRef} setChibiLoaded={setChibiLoaded} />
