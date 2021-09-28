@@ -73,8 +73,10 @@ export const completeText = {
                     <li>Les petits plus : des tickets restaurants, mais aussi des primes.</li>
                 </ul>
                 <h2>Perspectives d'évolution</h2>
+                <h3>Service commerciale :</h3>
                 <img src="/pespectives-commercial.png" alt=""/>
                 <br/>
+                <h3>Service back-office :</h3>
                 <img src="/perspectives-backoffice.png" alt=""/>
                 <h2>Alors, qu'attendez-vous ?</h2>
             </>
